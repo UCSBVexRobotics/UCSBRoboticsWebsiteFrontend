@@ -1,5 +1,13 @@
-import React from "react"
+import React, { Fragment } from "react"
+import GlobalStyle from '../styles/globalStyles';
+import ProjectSection from '../components/Home/ProjectSection';
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <ProjectSection />
+    </Fragment>
+  );
+
 }
