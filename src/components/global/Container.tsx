@@ -10,7 +10,7 @@ const Box = styled.div`
   padding: ${props => (props.introSection ? "10% 25%" : "5% 25%")};
 
   background-color: ${props =>
-    props.background === "dark" ? "#12232E" : "#DEF7F7"};
+    props.background === "dark" ? "#12232E" : "#EEFBFB"};
 
   background-image: ${props =>
     props.introSection ? `URL(${CarPic})` : "none"};

@@ -2,6 +2,7 @@ import React from "react"
 import Container from "../global/Container"
 import styled from "styled-components"
 import LogoCircle from "../../../static/logoCircle.png"
+import FlipBox from "../Home/FlipBox"
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const Img = styled.img`
 `
 
 const Title = styled.h1`
+  font-weight: lighter;
   color: white;
   margin-left: 20px;
   margin-bottom: 0;
@@ -24,9 +26,14 @@ const Title = styled.h1`
 const Description = styled.h2`
   color: white;
   padding-left: 15px;
+  display: flex;
+  align-items: center;
 `
 
 export default function IntroSection() {
+  //Array for the Flipbox
+  const flipBoxValues = ["robotics", "coding", "mechanics"]
+
   return (
     <Container introSection={true}>
       <HeaderWrapper>
@@ -34,9 +41,7 @@ export default function IntroSection() {
         <Title>Welcome to UCSB Robotics Club</Title>
       </HeaderWrapper>
       <Description>
-        Robotics team at UCSB is a project-oriented club for students to develop
-        a variety of technical skills in an applied environment. Students of all
-        majors are welcome to join!
+        Here you can learn <FlipBox flipBoxValues={flipBoxValues} />
       </Description>
     </Container>
   )
