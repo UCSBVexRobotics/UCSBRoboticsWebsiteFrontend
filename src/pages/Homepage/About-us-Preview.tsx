@@ -5,9 +5,9 @@ import Img from "../../../static/about-us.jpg"
 import Button from "../Button"
 
 const Info = styled.div`
-  background: green;
-  flex-basis: 50%;
-  order: 1;
+  // background: green;
+  // flex-basis: 50%;
+  // order: 1;
 `
 
 const Title = styled.h1`
@@ -19,7 +19,9 @@ const Text = styled.p`
 `
 
 const Image = styled.img`
-  height: 100%;
+  width: 100%;
+  height: auto;
+  min-width: 300px;
 `
 const ImageWrapper = styled.div`
   background: red;
@@ -41,9 +43,7 @@ export default function About_us_Preview() {
           We participate in several competitions, educational outreach programs
           and member-initied projects.{" "}
         </Text>
-        <center>
-          <Button link="about-us">Learn More</Button>
-        </center>
+        <Button link="about-us">Learn More</Button>
       </Info>
       <ImageWrapper>
         <Image src={Img} />
