@@ -6,10 +6,10 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 10% 20%;
+  padding: 10% 25%;
 
   background-color: ${props =>
-    props.background === "dark" ? "#12232E" : "white"};
+    props.background === "dark" ? "#12232E" : "#DEF7F7"};
 `
 
 const HeaderContainer = styled.div`
@@ -22,11 +22,12 @@ const HeaderContainer = styled.div`
 `
 
 const ProjectTitle = styled.h1`
-  color: white;
+  color: ${props => (props.color === "light" ? "#12232E" : "white")};
 `
 
-const LineLeft = styled.div`
-  border-bottom: solid 3px white;
+const Line = styled.div`
+  border-bottom: solid 3px;
+  border-color: ${props => (props.color === "light" ? "#12232E" : "white")};
   border-top-width: 0px;
   transition: width 0.5s;
 
@@ -40,12 +41,13 @@ export default function Container(props) {
     <Box background={props.background}>
       <HeaderContainer titleAlignment={props.titleAlignment}>
         <ProjectTitle
+          color={props.background}
           onMouseEnter={() => setLineAnimation(true)}
           onMouseLeave={() => setLineAnimation(false)}
         >
           {props.title}
         </ProjectTitle>
-        <LineLeft lineAnimation={lineAnimation} />
+        <Line color={props.background} lineAnimation={lineAnimation} />
       </HeaderContainer>
       {props.children}
     </Box>
