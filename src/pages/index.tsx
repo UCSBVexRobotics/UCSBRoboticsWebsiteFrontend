@@ -7,6 +7,8 @@ import About_us_Preview from "./Homepage/About-us-Preview";
 import Projects_Preview from "./Homepage/Projects-Preview";
 import Calendar_Preview from "./Homepage/Calendar-Preview";
 
+import ProjectSection from "../components/Home/ProjectSection";
+
 import styled, { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -33,7 +35,7 @@ export default function HomePage() {
       <GlobalStyle />
       <About_us_Preview />
       <About_us_Preview />
-      <About_us_Preview />
+      <ProjectSection />
     </Wrapper>
   );
 }

@@ -18,9 +18,7 @@
     "gatsby": "^2.25.3",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-is": "^17.0.1",
-    "styled-components": "^5.2.1",
-    "yarn": "^1.22.10"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "prettier": "2.1.2"

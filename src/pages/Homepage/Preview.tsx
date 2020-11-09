@@ -16,7 +16,6 @@ const Content = styled.span`
     
     display: flex;
     align-items: stretch;
-    flex-flow: row wrap;
     justify-content: flex-start;
 `
 
