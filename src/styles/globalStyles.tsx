@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
+export default const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Arial';
     }
@@ -13,5 +13,3 @@ const GlobalStyle = createGlobalStyle`
         margin-bottom: 15px;
     }
 `;
-
-export default GlobalStyle
