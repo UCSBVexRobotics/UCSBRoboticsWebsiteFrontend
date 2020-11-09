@@ -9,6 +9,10 @@ const Box = styled.div`
   flex-wrap: wrap;
   padding: ${props => (props.introSection ? "10% 25%" : "5% 25%")};
 
+  @media (max-width: 710px) {
+    padding: 5% 10%;
+  }
+
   background-color: ${props =>
     props.background === "dark" ? "#12232E" : "#EEFBFB"};
 
@@ -49,6 +53,8 @@ const Line = styled.div`
 
 export default function Container(props) {
   const [lineAnimation, setLineAnimation] = useState(false)
+
+  //TODO add in the line animation when user scrolls into the view
 
   return (
     <Box background={props.background} introSection={props.introSection}>
