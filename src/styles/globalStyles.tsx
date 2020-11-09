@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
 
-export default const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Arial';
     }
@@ -12,4 +12,5 @@ export default const GlobalStyle = createGlobalStyle`
     h2 {
         margin-bottom: 15px;
     }
-`;
+`
+export default GlobalStyle
