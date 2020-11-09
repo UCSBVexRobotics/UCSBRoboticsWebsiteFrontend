@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import GlobalStyle from '../styles/globalStyles';
+import AboutUs from '../components/Home/AboutUs';
 import ProjectSection from '../components/Home/ProjectSection';
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <Fragment>
       <GlobalStyle />
       <ProjectSection />
+      <AboutUs />
     </Fragment>
   );
 
