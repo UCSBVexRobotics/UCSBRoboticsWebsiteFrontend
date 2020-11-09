@@ -2,20 +2,26 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const Section = styled.div`
-    height: 450px;
     margin: 0;
-    padding: 0 350px;
+    height: 50vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const Content = styled.span`
+    width: 80vw;
+    height: 90%;
+    background: gray;
+    
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 `
 
-export default function Preview({col, children}) {
-    if (col == "stripe1") {
-        col = "#FDFDFF"
-    }
-    else if (col == "stripe2") {
-        col = "#4DA8DA"
-    }
-
-    return <Section style={{backgroundColor: col}}>
-        {children}
+export default function Preview({children}) {
+    return <Section>
+        <Content>{children}</Content>
     </Section>;
 }
