@@ -1,15 +1,20 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import CarPic from "../../../static/car.jpg"
 
 const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 10% 25%;
+  padding: ${props => (props.introSection ? "10% 25%" : "5% 25%")};
 
   background-color: ${props =>
     props.background === "dark" ? "#12232E" : "#DEF7F7"};
+
+  background-image: ${props =>
+    props.introSection ? `URL(${CarPic})` : "none"};
+  background-size: cover;
 `
 
 const HeaderContainer = styled.div`
@@ -21,8 +26,16 @@ const HeaderContainer = styled.div`
     props.titleAlignment === "left" ? "flex-start" : "flex-end"};
 `
 
-const ProjectTitle = styled.h1`
-  color: ${props => (props.color === "light" ? "#12232E" : "white")};
+const LightProjectTitle = styled.h1`
+  background: -webkit-linear-gradient(#4da8da, #203647);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`
+
+const DarkProjectTitle = styled.h1`
+  background: -webkit-linear-gradient(white, #4da8da);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `
 
 const Line = styled.div`
@@ -38,16 +51,26 @@ export default function Container(props) {
   const [lineAnimation, setLineAnimation] = useState(false)
 
   return (
-    <Box background={props.background}>
+    <Box background={props.background} introSection={props.introSection}>
       <HeaderContainer titleAlignment={props.titleAlignment}>
-        <ProjectTitle
-          color={props.background}
-          onMouseEnter={() => setLineAnimation(true)}
-          onMouseLeave={() => setLineAnimation(false)}
-        >
-          {props.title}
-        </ProjectTitle>
-        <Line color={props.background} lineAnimation={lineAnimation} />
+        {props.background === "light" ? (
+          <LightProjectTitle
+            onMouseEnter={() => setLineAnimation(true)}
+            onMouseLeave={() => setLineAnimation(false)}
+          >
+            {props.title}
+          </LightProjectTitle>
+        ) : (
+          <DarkProjectTitle
+            onMouseEnter={() => setLineAnimation(true)}
+            onMouseLeave={() => setLineAnimation(false)}
+          >
+            {props.title}
+          </DarkProjectTitle>
+        )}
+        {props.title && (
+          <Line color={props.background} lineAnimation={lineAnimation} />
+        )}
       </HeaderContainer>
       {props.children}
     </Box>

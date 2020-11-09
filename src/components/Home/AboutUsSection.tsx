@@ -19,6 +19,7 @@ const Text = styled.h4`
   margin-bottom: 0;
   @media (max-width: 1490px) {
     order: 2;
+    margin-top: 20px;
   }
 `
 
