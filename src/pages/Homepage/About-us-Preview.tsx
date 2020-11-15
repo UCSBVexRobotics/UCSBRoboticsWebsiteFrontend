@@ -1,49 +1,73 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import Preview from "./Preview";
-import Img from  "../../../static/about-us.jpg"
-import Button from "../Button";
-import Container from '../../components/global/Container';
+import React from "react"
+import styled, { css } from "styled-components"
+import Preview from "./Preview"
+import Img from "../../../static/about-us.jpg"
+import Button from "../Button"
+import Container from "../../components/global/Container";
 
 const Info = styled.div`
-    order: 1;
-    background: green;
-    width: 500px;
+  // background: green;
+  // flex-basis: 50%;
+  order: 1;
+  justify-content: center;
 `
 
 const Title = styled.h1`
-    font-size: 3vw;
+  font-size: 3vw;
 `
 
 const Text = styled.p`
-    font-size: 1.5vw;
+  font-size: 1.5vw;
 `
 
 const Image = styled.img`
-    min-width: 300px;
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
+  min-width: 300px;
 `
-const Section = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-`;
+const ImageWrapper = styled.div`
+  background: red;
+  height: 100%;
+  order: 2;
+
+  display: flex;
+  flex-basis: 50%;
+  align-content: stretch;
+  justify-content: stretch;
+`
 
 export default function About_us_Preview() {
-    return (
+  return (
     <Container 
-        background='dark' 
-        title='About Us'
-    >   
-        <Section>
-            <Text>We participate in several competitions, educational outreach programs and member-initied projects. </Text>
+        background="dark" 
+        title="About Us"
+    >
+        <Info>
+            <Text>
+                We participate in several competitions, educational outreach programs
+                and member-initied projects.{" "}
+            </Text>
             <Button link="about-us">Learn More</Button>
-        
+        </Info>
+        <ImageWrapper>
             <Image src={Img} />
-        </Section>
-
+        </ImageWrapper>
     </Container>
-    );
+  )
 }
+
+/* 
+<Preview>
+      <Info>
+        <Title>About Us</Title>
+        <Text>
+          We participate in several competitions, educational outreach programs
+          and member-initied projects.{" "}
+        </Text>
+        <Button link="about-us">Learn More</Button>
+      </Info>
+      <ImageWrapper>
+        <Image src={Img} />
+      </ImageWrapper>
+    </Preview>
+    */

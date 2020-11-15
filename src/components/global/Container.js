@@ -9,12 +9,12 @@ const Box = styled.div`
   padding: 10% 20%;
 
   background-color: ${props => props.background === 'dark' ? "#12232E" : "white"}
-
 `;
 
 const ProjectTitle = styled.h1`
-    color: white;
     margin-right: auto;
+
+    color: ${props => props.color === 'dark' ? "white" : "#12232E" }
 `;
 
 const Line = styled.div`
@@ -40,7 +40,12 @@ export default function Container(props) {
       children={props.children}
       background={props.background}
     >
-      <ProjectTitle onClick={() => setLineAnimation(true)}>{props.title}</ProjectTitle>
+      <ProjectTitle 
+        onClick={() => setLineAnimation(true)} 
+        color={props.background}
+      >
+        {props.title}
+      </ProjectTitle>
       <Line
         startLineAnimation={lineAnimation}
       />
