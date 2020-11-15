@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "gatsby"
 import LogoCircle from "../../static/logoCircle.png"
 
 const NavBarContainer = styled.div`
@@ -35,7 +35,7 @@ const LinksContainer = styled.div`
   align-items: center;
 `
 
-const NavLink = styled.h5`
+const NavLink = styled.div`
   margin: 0 30px;
   font-weight: lighter;
   letter-spacing: 0.2em;
@@ -58,9 +58,9 @@ export default function NavBar() {
       document.documentElement.scrollTop > 100
     ) {
       document.getElementById("nav-bar-container").style.backgroundColor =
-        "rgba(255, 255, 255, 0.8)"
+        "rgba(255, 255, 255, 0.7)"
       for (var i = 0; i < navLink.length; i++)
-        navLink[i].style.color = "#203647"
+        navLink[i].style.color = "#003384"
     } else {
       document.getElementById("nav-bar-container").style.backgroundColor =
         "transparent"
@@ -72,23 +72,21 @@ export default function NavBar() {
     <NavBarContainer id="nav-bar-container">
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()} className="nav-link">
-          UCSB ROBOTICS CLUB
+          <Link to="/">UCSB ROBOTICS CLUB</Link>
         </Title>
         <LinksContainer>
-          <Router>
-            <Link to="/About">
-              <NavLink className="nav-link">About</NavLink>
-            </Link>
-            <Link to="/Calendar">
-              <NavLink className="nav-link">Calendar</NavLink>
-            </Link>
-            <Link to="/Contact">
-              <NavLink className="nav-link">Contact</NavLink>
-            </Link>
-            <Link to="/Login">
-              <NavLink className="nav-link">Login</NavLink>
-            </Link>
-          </Router>
+          <NavLink className="nav-link">
+            <Link to="/About">About</Link>
+          </NavLink>
+          <NavLink className="nav-link">
+            <Link to="/Calendar">Calendar</Link>
+          </NavLink>
+          <NavLink className="nav-link">
+            <Link to="/Contact">Contact</Link>
+          </NavLink>
+          <NavLink className="nav-link">
+            <Link to="/Login">Login</Link>
+          </NavLink>
         </LinksContainer>
       </NavBarInnerContainer>
     </NavBarContainer>

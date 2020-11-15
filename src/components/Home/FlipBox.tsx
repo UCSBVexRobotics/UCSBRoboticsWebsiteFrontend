@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
 const Text = styled.h2`
-  color: white;
+  color: #eefbfb;
   margin: 0;
   margin-left: 8px;
 `

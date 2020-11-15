@@ -1,5 +1,5 @@
 import React from "react"
-import Container from "../global/Container"
+import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
 import LogoCircle from "../../../static/logoCircle.png"
 import FlipBox from "../Home/FlipBox"
@@ -28,7 +28,7 @@ const TextWrapper = styled.div`
 
 const Title = styled.h1`
   font-weight: lighter;
-  color: white;
+  color: #eefbfb;
   margin-bottom: 0;
   margin-top: 0;
   font-size: 70px;
@@ -77,7 +77,7 @@ export default function IntroSection() {
   const flipBoxValues = ["robotics", "coding", "mechanics"]
 
   return (
-    <Container introSection={true}>
+    <HomeContainer introSection={true}>
       <HeaderWrapper>
         <Img src={LogoCircle} />
         <TextWrapper>
@@ -88,6 +88,6 @@ export default function IntroSection() {
           </DescriptionWrapper>
         </TextWrapper>
       </HeaderWrapper>
-    </Container>
+    </HomeContainer>
   )
 }

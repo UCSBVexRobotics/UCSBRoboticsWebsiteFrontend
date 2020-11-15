@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import CarPic from "../../../static/car.jpg"
 
 const Box = styled.div`
   display: flex;
@@ -8,16 +7,11 @@ const Box = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: ${props => (props.introSection ? "10% 25%" : "5% 25%")};
-
+  padding-bottom: ${props => (props.introSection ? "5%" : "10%")};
   @media (max-width: 710px) {
     padding: 5% 10%;
   }
 
-  background-color: ${props =>
-    props.background === "dark" ? "#12232E" : "#EEFBFB"};
-
-  background-image: ${props =>
-    props.introSection ? `URL(${CarPic})` : "none"};
   background-size: cover;
 `
 
@@ -31,27 +25,23 @@ const HeaderContainer = styled.div`
 `
 
 const LightProjectTitle = styled.h1`
-  background: -webkit-linear-gradient(#4da8da, #203647);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #003384;
 `
 
 const DarkProjectTitle = styled.h1`
-  background: -webkit-linear-gradient(white, #4da8da);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #eefbfb;
 `
 
 const Line = styled.div`
   border-bottom: solid 3px;
-  border-color: ${props => (props.color === "light" ? "#12232E" : "white")};
+  border-color: ${props => (props.color === "light" ? "#003384" : "white")};
   border-top-width: 0px;
   transition: width 0.5s;
 
   width: ${props => (props.lineAnimation ? "200px" : "100px")};
 `
 
-export default function Container(props) {
+export default function HomeContainer(props) {
   const [lineAnimation, setLineAnimation] = useState(false)
 
   //TODO add in the line animation when user scrolls into the view

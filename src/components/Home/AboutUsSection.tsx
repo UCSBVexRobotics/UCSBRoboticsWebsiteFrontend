@@ -1,5 +1,5 @@
 import React from "react"
-import Container from "../global/Container"
+import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
 import picOne from "../../../static/pic1.jpg"
 
@@ -14,9 +14,10 @@ const Section = styled.div`
   }
 `
 
-const Text = styled.h4`
+const Text = styled.h3`
   margin-top: 0;
   margin-bottom: 0;
+  color: #eefbfb;
   @media (max-width: 1490px) {
     order: 2;
     margin-top: 20px;
@@ -24,7 +25,7 @@ const Text = styled.h4`
 `
 
 const HighlightedText = styled.span`
-  color: #007cc7;
+  color: #3dd6ff;
 `
 
 const ImgWrapper = styled.div`
@@ -40,7 +41,7 @@ const Img = styled.img`
 
 export default function AboutUsSection() {
   return (
-    <Container background="light" title="About Us" titleAlignment="left">
+    <HomeContainer background="light" title="About Us" titleAlignment="left">
       <Section>
         <Text>
           The Robotics Club at UCSB is a project-oriented club composed of
@@ -58,6 +59,6 @@ export default function AboutUsSection() {
           <Img src={picOne} alt="Group picture of the Robotics Team" />
         </ImgWrapper>
       </Section>
-    </Container>
+    </HomeContainer>
   )
 }
