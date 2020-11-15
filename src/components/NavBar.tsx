@@ -71,21 +71,31 @@ export default function NavBar() {
   return (
     <NavBarContainer id="nav-bar-container">
       <NavBarInnerContainer>
-        <Title onClick={() => toTopOfPage()} className="nav-link">
-          <Link to="/">UCSB ROBOTICS CLUB</Link>
+        <Title onClick={() => toTopOfPage()}>
+          <Link to="/" className="nav-link">
+            UCSB ROBOTICS CLUB
+          </Link>
         </Title>
         <LinksContainer>
-          <NavLink className="nav-link">
-            <Link to="/About">About</Link>
+          <NavLink>
+            <Link to="/About" className="nav-link">
+              About
+            </Link>
           </NavLink>
-          <NavLink className="nav-link">
-            <Link to="/Calendar">Calendar</Link>
+          <NavLink>
+            <Link to="/Calendar" className="nav-link">
+              Calendar
+            </Link>
           </NavLink>
-          <NavLink className="nav-link">
-            <Link to="/Contact">Contact</Link>
+          <NavLink>
+            <Link to="/Contact" className="nav-link">
+              Contact
+            </Link>
           </NavLink>
-          <NavLink className="nav-link">
-            <Link to="/Login">Login</Link>
+          <NavLink>
+            <Link to="/Login" className="nav-link">
+              Login
+            </Link>
           </NavLink>
         </LinksContainer>
       </NavBarInnerContainer>
