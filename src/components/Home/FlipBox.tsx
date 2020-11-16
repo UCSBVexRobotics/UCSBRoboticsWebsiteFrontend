@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
-const FlipBoxContainer = styled.div`
-  background-color: transparent;
-  margin-left: 8px;
-  height: 50px;
-`
-const FlipBoxCard = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`
-
-const Text = styled.h4`
-  color: white;
+const Text = styled.h2`
+  color: #eefbfb;
   margin: 0;
-  position: absolute;
+  margin-left: 8px;
 `
 
 export default function FlipBox(props) {
@@ -37,11 +25,5 @@ export default function FlipBox(props) {
   //Set the value of the text
   const currentVal = props.flipBoxValues[index]
 
-  return (
-    <FlipBoxContainer>
-      <FlipBoxCard>
-        <Text>{currentVal}</Text>
-      </FlipBoxCard>
-    </FlipBoxContainer>
-  )
+  return <Text>{currentVal}</Text>
 }

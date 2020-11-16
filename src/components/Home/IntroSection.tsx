@@ -1,33 +1,75 @@
 import React from "react"
-import Container from "../global/Container"
+import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
 import LogoCircle from "../../../static/logoCircle.png"
 import FlipBox from "../Home/FlipBox"
 
 const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
+
+  @media (max-width: 1100px) {
+    flex-orientation: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `
 
 const Img = styled.img`
   width: 160px;
 `
 
+const TextWrapper = styled.div`
+  display: flex;
+  flex-orientation: column;
+  flex-wrap: wrap;
+  margin-left: 20px;
+`
+
 const Title = styled.h1`
   font-weight: lighter;
-  color: white;
-  margin-left: 20px;
+  color: #eefbfb;
   margin-bottom: 0;
   margin-top: 0;
   font-size: 70px;
+
+  @media (max-width: 1550px) {
+    font-size: 50px;
+  }
+
+  @media (max-width: 1100px) {
+    text-align: center;
+  }
+
+  @media (max-width: 880px) {
+    font-size: 40px;
+  }
+`
+
+const DescriptionWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 1100px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 895px) {
+    flex-orientation: column;
+    flex-wrap: wrap;
+  }
 `
 
 const Description = styled.h2`
   color: white;
-  padding-left: 15px;
   display: flex;
   align-items: center;
+  margin: 0;
+
+  @media (max-width: 570px) {
+    text-align: center;
+  }
 `
 
 export default function IntroSection() {
@@ -35,14 +77,17 @@ export default function IntroSection() {
   const flipBoxValues = ["robotics", "coding", "mechanics"]
 
   return (
-    <Container introSection={true}>
+    <HomeContainer introSection={true}>
       <HeaderWrapper>
         <Img src={LogoCircle} />
-        <Title>Welcome to UCSB Robotics Club</Title>
+        <TextWrapper>
+          <Title>Welcome to UCSB Robotics Club</Title>
+          <DescriptionWrapper>
+            <Description>Here you can learn</Description>
+            <FlipBox flipBoxValues={flipBoxValues} />
+          </DescriptionWrapper>
+        </TextWrapper>
       </HeaderWrapper>
-      <Description>
-        Here you can learn <FlipBox flipBoxValues={flipBoxValues} />
-      </Description>
-    </Container>
+    </HomeContainer>
   )
 }

@@ -6,9 +6,9 @@ const Circle = styled.span`
   width: 250px;
   margin: 10px;
   background-color: #007cc7;
-  border-radius: 150px;
+  border-radius: 100px;
   display: flex;
-  color: white;
+  color: #eefbfb;
   flex-direction: column;
   justify-content: center;
   align-items: center;

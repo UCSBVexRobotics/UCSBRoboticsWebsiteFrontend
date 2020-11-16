@@ -1,5 +1,5 @@
 import React from "react"
-import Container from "../global/Container"
+import HomeContainer from "../global/HomeContainer"
 import ProjectCircle from "./ProjectCircle"
 import styled from "styled-components"
 
@@ -13,7 +13,7 @@ const Section = styled.div`
 
 export default function ProjectSection() {
   return (
-    <Container background="dark" title="Projects" titleAlignment="right">
+    <HomeContainer background="dark" title="Projects" titleAlignment="right">
       <Section>
         <ProjectCircle
           title="Project #1"
@@ -46,6 +46,6 @@ export default function ProjectSection() {
           description="Description"
         />
       </Section>
-    </Container>
+    </HomeContainer>
   )
 }

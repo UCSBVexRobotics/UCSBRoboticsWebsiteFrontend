@@ -3,6 +3,9 @@ import styled from "styled-components"
 import { BrowserRouter as Router } from "react-router-dom"
 import LogoCircle from "../../static/logoCircle.png"
 
+import { FacebookSquare } from '@styled-icons/boxicons-logos/FacebookSquare';
+import { Email } from '@styled-icons/material/Email';
+
 import { Link } from 'gatsby';
 
 
@@ -14,8 +17,6 @@ const FooterContainer = styled.div`
 `
 
 const LogoContainer = styled.div`
-    background-color: #005b93;
-
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -32,8 +33,6 @@ const Image = styled.img`
 `
 
 const LinkContainer = styled.div`
-    background-color: #007cc7;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -100,8 +99,8 @@ export default function Footer() {
                         <Link to="/contact-us">Contact Page</Link>
                     </ColumnItem>
                     <ColumnItem>
-                        <Link to='https://www.facebook.com/ucsbroboticsclub'>FB</Link>
-                        <Link to=''>Mail</Link>
+                        <Link to='https://www.facebook.com/ucsbroboticsclub'><FacebookSquare /></Link>
+                        <Link to='https://www.facebook.com/ucsbroboticsclub'><Email /></Link>
                     </ColumnItem>
                 </ColumnList>
             </LinkContainer>
