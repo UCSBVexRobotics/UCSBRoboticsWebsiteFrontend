@@ -78,7 +78,7 @@ export default function NavBar() {
         </Title>
         <LinksContainer>
           <NavLink>
-            <Link to="/About" className="nav-link">
+            <Link to="/Projects" className="nav-link">
               About
             </Link>
           </NavLink>

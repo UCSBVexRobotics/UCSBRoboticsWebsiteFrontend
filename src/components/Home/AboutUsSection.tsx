@@ -46,14 +46,14 @@ export default function AboutUsSection() {
         <Text>
           The Robotics Club at UCSB is a project-oriented club composed of
           students interested in the many fields related to robotics, and we
-          will be doing the{" "}
-          <HighlightedText>VEX Robotics Competition</HighlightedText> this year.
-          We participate in several competitions throughout the year, as well as
-          volunteer work, educational outreach programs, and working on other
-          member-initiated projects. Students of all majors and skill levels
-          with an interest in learning more about robotics are strongly
-          encouraged to join and participate in the activities held throughout
-          the year!
+          will normally would participate in the{" "}
+          <HighlightedText>VEX Robotics Competition</HighlightedText>. Due to
+          the uncertainty caused by the pandemic, we will not compete this year
+          and have shifted our goal to creating{" "}
+          <HighlightedText>three technical skill tracks</HighlightedText> for
+          the development of our members' engineering experiences! We also have
+          a <HighlightedText>web design project</HighlightedText> for members
+          interested in a self-motivated collaboration experience.
         </Text>
         <ImgWrapper>
           <Img src={picOne} alt="Group picture of the Robotics Team" />

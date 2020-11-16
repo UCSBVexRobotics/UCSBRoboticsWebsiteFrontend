@@ -13,37 +13,33 @@ const Section = styled.div`
 
 export default function ProjectSection() {
   return (
-    <HomeContainer background="dark" title="Projects" titleAlignment="right">
+    <HomeContainer
+      background="dark"
+      title="Current Projects"
+      titleAlignment="right"
+    >
       <Section>
         <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
+          title="Electrical Team"
+          lead="Edward Liu & Rahul Varghese"
+          description="Goals: Learn and build logic gates, simulate circuits in LTSpice"
         />
         <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
+          title="Mechanical Team"
+          lead="Rafee Q & Steven Man"
+          description="Goals: Learn how to use CAD Solidworks, extended extrusion tools, and engineering drawings 
+          Projects: Crane Claw CAD and Slingshot Turret CAD"
         />
         <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
+          title="Software Team"
+          lead="Alex Mei"
+          description="Goals: 5 Workshops Series from the Basics to OOP, Short Tag-Team Projects with Robotics Applications, and a Multi-Phase Vex
+          Simulation Group Project"
         />
         <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
-        />
-        <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
-        />
-        <ProjectCircle
-          title="Project #1"
-          lead="Lead #1"
-          description="Description"
+          title="Web Design Team"
+          lead="Angela Chen & Nina Huang"
+          description="Goals: Build/redesign Robotics Club website using ASP.net and Gatsby"
         />
       </Section>
     </HomeContainer>

@@ -4,6 +4,7 @@ import styled from "styled-components"
 const Circle = styled.span`
   height: 250px;
   width: 250px;
+  padding: 3%;
   margin: 10px;
   background-color: #007cc7;
   border-radius: 100px;
@@ -25,6 +26,18 @@ const CenteredText = styled.div`
   align-items: center;
 `
 
+const TitleText = styled.h2`
+  text-align: center;
+`
+
+const LeadText = styled.h3`
+  text-align: center;
+`
+
+const DescriptionText = styled.h4`
+  text-align: center;
+`
+
 export default function ProjectCircle(props) {
   const [hover, setHover] = useState(false)
 
@@ -35,12 +48,12 @@ export default function ProjectCircle(props) {
     >
       {hover ? (
         <CenteredText>
-          <h4>{props.description}</h4>
+          <DescriptionText>{props.description}</DescriptionText>
         </CenteredText>
       ) : (
         <CenteredText>
-          <h2>{props.title}</h2>
-          <h3>{props.lead}</h3>
+          <TitleText>{props.title}</TitleText>
+          <LeadText>{props.lead}</LeadText>
         </CenteredText>
       )}
     </Circle>

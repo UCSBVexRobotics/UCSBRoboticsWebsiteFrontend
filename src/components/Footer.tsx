@@ -1,24 +1,20 @@
 import React from "react"
 import styled from "styled-components"
-import { BrowserRouter as Router } from "react-router-dom"
 import LogoCircle from "../../static/logoCircle.png"
-
 import { FacebookSquare } from "@styled-icons/boxicons-logos/FacebookSquare"
 import { Email } from "@styled-icons/material/Email"
-
 import { Link } from "gatsby"
 
 const FooterContainer = styled.div`
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding: 0 10%;
 `
 
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 10%;
   flex-grow: 1;
 `
 const ClubName = styled.h2`
