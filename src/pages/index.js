@@ -5,6 +5,7 @@ import ProjectSection from "../components/Home/ProjectSection"
 import AboutUsSection from "../components/Home/AboutUsSection"
 import IntroSection from "../components/Home/IntroSection"
 import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 const BackgroundContainer = styled.div`
   background-image: linear-gradient(#3DD6FF, #003384)
@@ -18,6 +19,7 @@ export default function Home() {
       <IntroSection />
       <AboutUsSection />
       <ProjectSection />
+      <Footer />
     </BackgroundContainer>
   )
 }
