@@ -46,7 +46,7 @@ export default function AboutUsSection() {
         <Text>
           The Robotics Club at UCSB is a project-oriented club composed of
           students interested in the many fields related to robotics, and we
-          will normally would participate in the{" "}
+          normally would participate in the{" "}
           <HighlightedText>VEX Robotics Competition</HighlightedText>. Due to
           the uncertainty caused by the pandemic, we will not compete this year
           and have shifted our goal to creating{" "}
