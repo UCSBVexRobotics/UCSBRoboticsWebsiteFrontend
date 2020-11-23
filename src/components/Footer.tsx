@@ -129,44 +129,44 @@ export default function Footer() {
     }
 
     return (
-    <FooterContainer>
-      <LogoContainer>
-        <Image src={LogoCircle} />
-        <ClubName>UCSB ROBOTICS CLUB</ClubName>
-      </LogoContainer>
-      <LinkContainer>
-        <Column>
-            <Ct>Club</Ct>
-            <Ci to="/">About Us</Ci>
-            <Ci to="/Projects">Projects</Ci>
-            <Ci to="/Calendar">Calendar</Ci>
-        </Column>
-        <Column>
-            <Ct>Projects</Ct>
-            <Ci to="/">Electrical Team</Ci>
-            <Ci to="/">Mechanical Team</Ci>
-            <Ci to="/">Software Team</Ci>
-            <Ci to="/">Web Design Team</Ci>
-        </Column>
-        <Column>
-            <Ct>Members</Ct>
-            <Ci to="/">Dashboard</Ci>
-            <Ci to="/">Profile</Ci>
-            <Ci to="/">Store</Ci>
-        </Column>
-        <Column>
-          <Ct>Connect</Ct>
-          <Ci to="/contact-us">Contact Page</Ci>
-          <ColumnItem>
-            <Link to="https://www.facebook.com/ucsbroboticsclub">
-                <FacebookSquare size="40px" />
-            </Link>
-            <Link to="/">
-                <Email size="40px" />
-            </Link>
-          </ColumnItem>
-        </Column>
-      </LinkContainer>
-    </FooterContainer>
-  )
+        <FooterContainer>
+        <LogoContainer>
+            <Image src={LogoCircle} />
+            <ClubName>UCSB ROBOTICS CLUB</ClubName>
+        </LogoContainer>
+        <LinkContainer>
+            <Column>
+                <Ct>Club</Ct>
+                <Ci to="/">About Us</Ci>
+                <Ci to="/Projects">Projects</Ci>
+                <Ci to="/Calendar">Calendar</Ci>
+            </Column>
+            <Column>
+                <Ct>Projects</Ct>
+                <Ci to="/">Electrical Team</Ci>
+                <Ci to="/">Mechanical Team</Ci>
+                <Ci to="/">Software Team</Ci>
+                <Ci to="/">Web Design Team</Ci>
+            </Column>
+            <Column>
+                <Ct>Members</Ct>
+                <Ci to="/">Dashboard</Ci>
+                <Ci to="/">Profile</Ci>
+                <Ci to="/">Store</Ci>
+            </Column>
+            <Column>
+            <Ct>Connect</Ct>
+            <Ci to="/contact-us">Contact Page</Ci>
+            <ColumnItem>
+                <Link to="https://www.facebook.com/ucsbroboticsclub">
+                    <FacebookSquare size="40px" />
+                </Link>
+                <Link to="/">
+                    <Email size="40px" />
+                </Link>
+            </ColumnItem>
+            </Column>
+        </LinkContainer>
+        </FooterContainer>
+    )
 }
