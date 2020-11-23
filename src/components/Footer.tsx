@@ -161,7 +161,7 @@ export default function Footer() {
                 <Link to="https://www.facebook.com/ucsbroboticsclub">
                     <FacebookSquare size="40px" />
                 </Link>
-                <Link to="/">
+                <Link href="mailto:roboticsclubucsb@gmail.com">
                     <Email size="40px" />
                 </Link>
             </ColumnItem>
