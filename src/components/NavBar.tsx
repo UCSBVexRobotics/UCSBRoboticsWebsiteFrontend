@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import LoginModal from "./global/LoginModal"
+import SignupModal from "./global/SignupModal"
+import ForgotPasswordModal from "./global/ForgotPasswordModal"
 import LogoCircle from "../../static/logoCircle.png"
 
 const NavBarContainer = styled.div`
@@ -73,14 +75,50 @@ export default function NavBar() {
     }
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState({
+    LoginModal: false,
+    SignupModal: false,
+    ForgotPasswordModal: false
+  });
+
+  useEffect(() => {
+    if (isModalOpen.LoginModal || isModalOpen.SignupModal || isModalOpen.ForgotPasswordModal) {
+      document.body.style.overflow="hidden";
+
+      // this makes the content not move but the navbar still does
+      // document.body.style.paddingRight = '18px';
+    }
+    else {
+      document.body.style.overflow="unset";
+      // document.body.style.paddingRight = '0px';
+    }
+  }, [isModalOpen.LoginModal, isModalOpen.SignupModal, isModalOpen.ForgotPasswordModal]);
+
+  const setIsLoginModalOpen = (val) => setIsModalOpen({ LoginModal: val, SignupModal: false, ForgotPasswordModal: false });
+  const setIsSignupModalOpen = (val) => setIsModalOpen({ LoginModal: false, SignupModal: val, ForgotPasswordModal: false });
+  const setIsForgotPasswordModalOpen = (val) => setIsModalOpen({ LoginModal: false, SignupModal: false, ForgotPasswordModal: val });
 
   return (
     <NavBarContainer id="nav-bar-container">
       <LoginModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
+        isOpen={isModalOpen.LoginModal}
+        openSignupModal={() => setIsSignupModalOpen(true)}
+        openForgotPasswordModal={() => setIsForgotPasswordModalOpen(true)}
+        closeModal={() => setIsLoginModalOpen(false)}
         title="Login"
+      />
+      <SignupModal
+        isOpen={isModalOpen.SignupModal}
+        openLoginModal={() => setIsLoginModalOpen(true)}
+        closeModal={() => setIsSignupModalOpen(false)}
+        title="Signup"
+      />
+      <ForgotPasswordModal
+        isOpen={isModalOpen.ForgotPasswordModal}
+        openLoginModal={() => setIsLoginModalOpen(true)}
+        openSignupModal={() => setIsSignupModalOpen(true)}
+        closeModal={() => setIsForgotPasswordModalOpen(false)}
+        title="Signup"
       />
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
@@ -106,7 +144,7 @@ export default function NavBar() {
           </NavLink>
           <LoginLink
             className="nav-link"
-            onClick={() => setIsModalOpen(!isModalOpen)}
+            onClick={() => setIsLoginModalOpen(!isModalOpen.LoginModal)}
           >
             Login
           </LoginLink>

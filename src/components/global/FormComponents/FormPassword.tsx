@@ -1,6 +1,7 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import styled from "styled-components"
 import { Field } from "formik"
+import { EyeFill } from "@styled-icons/bootstrap/EyeFill";
 
 const FormFieldWrapper = styled.div`
   width: 100%;
@@ -25,17 +26,27 @@ const StyledField = styled.input`
   }
 `
 
+const InputWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`
+
 export default function FormPassword(props) {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <FormFieldWrapper>
       <StyledLabel htmlFor={props.name}>{props.name}</StyledLabel>
-      <Field
-        type="password"
-        component={StyledField}
-        name={props.name}
-        onChange={props.handleChange}
-        onBlur={props.handleBlur}
-      />
+      <InputWrapper>
+        <Field
+          type={showPassword ? "text" : "password"}
+          component={StyledField}
+          name={props.name}
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+        />
+        <EyeFill height="20px" onClick={() => setShowPassword(!showPassword)}/>
+      </InputWrapper>
     </FormFieldWrapper>
   )
 }

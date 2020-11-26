@@ -8,17 +8,24 @@ import SubmitButton from "./FormComponents/SubmitButton"
 import Modal from "./Modal"
 
 const CreateAccountLink = styled.p`
+  width: 100%;
   margin: 0;
   font-size: 15px;
   margin-left: 15px;
 `
 
-export default function LoginModal({ isOpen, openSignupModal, openForgotPasswordModal, closeModal }) {
+/*
+
+- There's too many fields that it cuts off the X in the top right
+
+*/
+
+export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
   return (
-    <Modal title="Login" isOpen={isOpen} closeModal={closeModal}>
+    <Modal title="Signup" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={() => console.log("Logged in!")}
+        initialValues={{ firstName: "", lastName: "", email: "", password: "", verifyPassword: "" }}
+        onSubmit={() => console.log("Signed up!")}
       >
         {({
           values,
@@ -31,6 +38,18 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
         }) => (
           <Form onSubmit={handleSubmit}>
             <FormField
+              name="First Name"
+              onChange={e => handleChange(e)}
+              onBlur={e => handleBlur(e)}
+              value={values.firstName}
+            />
+            <FormField
+              name="Last Name"
+              onChange={e => handleChange(e)}
+              onBlur={e => handleBlur(e)}
+              value={values.lastName}
+            />
+            <FormField
               name="Email"
               onChange={e => handleChange(e)}
               onBlur={e => handleBlur(e)}
@@ -42,12 +61,15 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
               onBlur={e => handleBlur(e)}
               value={values.password}
             />
-            <SubmitButton name="Login" disabled={isSubmitting} />
+            <FormPassword
+              name="Verify Password"
+              onChange={e => handleChange(e)}
+              onBlur={e => handleBlur(e)}
+              value={values.verifyPassword}
+            />
+            <SubmitButton name="Signup" disabled={isSubmitting} />
             <CreateAccountLink>
-              Don't have an account yet? Click <a onClick={() => openSignupModal()}>here</a> to create one!
-            </CreateAccountLink>
-            <CreateAccountLink>
-              Forgot password? Click <a onClick={() => openForgotPasswordModal()}>here</a>!
+              Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
             </CreateAccountLink>
           </Form>
         )}

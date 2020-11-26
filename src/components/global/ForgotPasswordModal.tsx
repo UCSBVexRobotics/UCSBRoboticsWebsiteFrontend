@@ -8,17 +8,18 @@ import SubmitButton from "./FormComponents/SubmitButton"
 import Modal from "./Modal"
 
 const CreateAccountLink = styled.p`
+  width: 100%;
   margin: 0;
   font-size: 15px;
   margin-left: 15px;
 `
 
-export default function LoginModal({ isOpen, openSignupModal, openForgotPasswordModal, closeModal }) {
+export default function ForgotPasswordModal({ isOpen, openLoginModal, openSignupModal, closeModal }) {
   return (
-    <Modal title="Login" isOpen={isOpen} closeModal={closeModal}>
+    <Modal title="Forgot Password" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={() => console.log("Logged in!")}
+        initialValues={{ email: "" }}
+        onSubmit={() => console.log("Signed up!")}
       >
         {({
           values,
@@ -36,18 +37,12 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
               onBlur={e => handleBlur(e)}
               value={values.email}
             />
-            <FormPassword
-              name="Password"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.password}
-            />
-            <SubmitButton name="Login" disabled={isSubmitting} />
+            <SubmitButton name="Send Verification" disabled={isSubmitting} />
             <CreateAccountLink>
-              Don't have an account yet? Click <a onClick={() => openSignupModal()}>here</a> to create one!
+              Remember Password? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
             </CreateAccountLink>
             <CreateAccountLink>
-              Forgot password? Click <a onClick={() => openForgotPasswordModal()}>here</a>!
+              Don't have an account? Click <a onClick={() => openSignupModal()}>here</a> to sign up!
             </CreateAccountLink>
           </Form>
         )}
