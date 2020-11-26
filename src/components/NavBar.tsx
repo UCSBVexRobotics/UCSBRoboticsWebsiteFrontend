@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import LoginModal from "./global/LoginModal"
 import LogoCircle from "../../static/logoCircle.png"
 
 const NavBarContainer = styled.div`
@@ -45,6 +46,10 @@ const NavLink = styled.div`
   }
 `
 
+const LoginLink = styled(NavLink)`
+  cursor: pointer;
+`
+
 function toTopOfPage() {
   window.scrollTo(0, 0)
 }
@@ -68,8 +73,15 @@ export default function NavBar() {
     }
   }
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <NavBarContainer id="nav-bar-container">
+      <LoginModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        title="Login"
+      />
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
           <Link to="/" className="nav-link">
@@ -92,11 +104,12 @@ export default function NavBar() {
               Contact
             </Link>
           </NavLink>
-          <NavLink>
-            <Link to="/Login" className="nav-link">
-              Login
-            </Link>
-          </NavLink>
+          <LoginLink
+            className="nav-link"
+            onClick={() => setIsModalOpen(!isModalOpen)}
+          >
+            Login
+          </LoginLink>
         </LinksContainer>
       </NavBarInnerContainer>
     </NavBarContainer>

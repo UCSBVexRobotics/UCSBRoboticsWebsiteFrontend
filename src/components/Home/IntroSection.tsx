@@ -4,6 +4,8 @@ import styled from "styled-components"
 import LogoCircle from "../../../static/logoCircle.png"
 import FlipBox from "../Home/FlipBox"
 
+import carImage from "../../../static/car.svg";
+
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: flex-start;
