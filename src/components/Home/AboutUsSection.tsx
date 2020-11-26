@@ -1,7 +1,8 @@
 import React from "react"
 import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
-import picOne from "../../../static/pic1.jpg"
+
+import background from "../../../static/background_transparent.svg";
 
 const Section = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ export default function AboutUsSection() {
         <Text>
           The Robotics Club at UCSB is a project-oriented club composed of
           students interested in the many fields related to robotics, and we
-          will normally would participate in the{" "}
+          normally would participate in the{" "}
           <HighlightedText>VEX Robotics Competition</HighlightedText>. Due to
           the uncertainty caused by the pandemic, we will not compete this year
           and have shifted our goal to creating{" "}
@@ -56,7 +57,7 @@ export default function AboutUsSection() {
           interested in a self-motivated collaboration experience.
         </Text>
         <ImgWrapper>
-          <Img src={picOne} alt="Group picture of the Robotics Team" />
+          <Img src={background} />
         </ImgWrapper>
       </Section>
     </HomeContainer>
