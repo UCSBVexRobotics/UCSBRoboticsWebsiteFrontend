@@ -118,7 +118,7 @@ export default function NavBar() {
         openLoginModal={() => setIsLoginModalOpen(true)}
         openSignupModal={() => setIsSignupModalOpen(true)}
         closeModal={() => setIsForgotPasswordModalOpen(false)}
-        title="Signup"
+        title="Forgot Password"
       />
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
