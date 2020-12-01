@@ -58,31 +58,34 @@ function toTopOfPage() {
 
 export default function NavBar() {
   //Function to change the overlay of the navbar once scroll past a 100px
-  window.onscroll = () => {
-    var navLink = document.getElementsByClassName("nav-link")
-    if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
-    ) {
-      document.getElementById("nav-bar-container").style.backgroundColor =
-        "rgba(255, 255, 255, 0.7)"
-      for (var i = 0; i < navLink.length; i++)
-        navLink[i].style.color = "#003384"
-    } else {
-      document.getElementById("nav-bar-container").style.backgroundColor =
-        "transparent"
-      for (var i = 0; i < navLink.length; i++) navLink[i].style.color = "white"
+  useEffect(() => {
+    window.onscroll = () => {
+      var navLink = document.getElementsByClassName("nav-link")
+      if (
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
+      ) {
+        document.getElementById("nav-bar-container").style.backgroundColor =
+          "rgba(255, 255, 255, 0.7)"
+        for (var i = 0; i < navLink.length; i++)
+          navLink[i].style.color = "#003384"
+      } else {
+        document.getElementById("nav-bar-container").style.backgroundColor =
+          "transparent"
+        for (var i = 0; i < navLink.length; i++)
+          navLink[i].style.color = "white"
+      }
     }
-  }
+  })
 
   const [isModalOpen, setIsModalOpen] = useState({
-    LoginModal: false,
-    SignupModal: false,
-    ForgotPasswordModal: false
+    Login: false,
+    Signup: false,
+    ForgotPassword: false
   });
 
   useEffect(() => {
-    if (isModalOpen.LoginModal || isModalOpen.SignupModal || isModalOpen.ForgotPasswordModal) {
+    if (isModalOpen.Login || isModalOpen.Signup || isModalOpen.ForgotPassword) {
       document.body.style.overflow="hidden";
 
       // this makes the content not move but the navbar still does
@@ -92,29 +95,29 @@ export default function NavBar() {
       document.body.style.overflow="unset";
       // document.body.style.paddingRight = '0px';
     }
-  }, [isModalOpen.LoginModal, isModalOpen.SignupModal, isModalOpen.ForgotPasswordModal]);
+  }, [isModalOpen.Login, isModalOpen.Signup, isModalOpen.ForgotPassword]);
 
-  const setIsLoginModalOpen = (val) => setIsModalOpen({ LoginModal: val, SignupModal: false, ForgotPasswordModal: false });
-  const setIsSignupModalOpen = (val) => setIsModalOpen({ LoginModal: false, SignupModal: val, ForgotPasswordModal: false });
-  const setIsForgotPasswordModalOpen = (val) => setIsModalOpen({ LoginModal: false, SignupModal: false, ForgotPasswordModal: val });
+  const setIsLoginModalOpen = (val) => setIsModalOpen({ Login: val, Signup: false, ForgotPassword: false });
+  const setIsSignupModalOpen = (val) => setIsModalOpen({ Login: false, Signup: val, ForgotPassword: false });
+  const setIsForgotPasswordModalOpen = (val) => setIsModalOpen({ Login: false, Signup: false, ForgotPassword: val });
 
   return (
     <NavBarContainer id="nav-bar-container">
       <LoginModal
-        isOpen={isModalOpen.LoginModal}
+        isOpen={isModalOpen.Login}
         openSignupModal={() => setIsSignupModalOpen(true)}
         openForgotPasswordModal={() => setIsForgotPasswordModalOpen(true)}
         closeModal={() => setIsLoginModalOpen(false)}
         title="Login"
       />
       <SignupModal
-        isOpen={isModalOpen.SignupModal}
+        isOpen={isModalOpen.Signup}
         openLoginModal={() => setIsLoginModalOpen(true)}
         closeModal={() => setIsSignupModalOpen(false)}
         title="Signup"
       />
       <ForgotPasswordModal
-        isOpen={isModalOpen.ForgotPasswordModal}
+        isOpen={isModalOpen.ForgotPassword}
         openLoginModal={() => setIsLoginModalOpen(true)}
         openSignupModal={() => setIsSignupModalOpen(true)}
         closeModal={() => setIsForgotPasswordModalOpen(false)}
@@ -144,7 +147,7 @@ export default function NavBar() {
           </NavLink>
           <LoginLink
             className="nav-link"
-            onClick={() => setIsLoginModalOpen(!isModalOpen.LoginModal)}
+            onClick={() => setIsLoginModalOpen(!isModalOpen.Login)}
           >
             Login
           </LoginLink>

@@ -69,7 +69,7 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
             />
             <SubmitButton name="Signup" disabled={isSubmitting} />
             <CreateAccountLink>
-              Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
+              Have an account? Click <button onClick={() => openLoginModal()}>here</button> to sign in!
             </CreateAccountLink>
           </Form>
         )}

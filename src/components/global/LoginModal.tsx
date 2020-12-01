@@ -44,10 +44,10 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
             />
             <SubmitButton name="Login" disabled={isSubmitting} />
             <CreateAccountLink>
-              Don't have an account yet? Click <a onClick={() => openSignupModal()}>here</a> to create one!
+              Don't have an account yet? Click <button onClick={() => openSignupModal()}>here</button> to create one!
             </CreateAccountLink>
             <CreateAccountLink>
-              Forgot password? Click <a onClick={() => openForgotPasswordModal()}>here</a>!
+              Forgot password? Click <button onClick={() => openForgotPasswordModal()}>here</button>!
             </CreateAccountLink>
           </Form>
         )}
