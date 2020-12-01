@@ -10,7 +10,9 @@ const FormFieldWrapper = styled.div`
   width: 100%;
 `
 
-const StyledLabel = styled.label``
+const StyledLabel = styled.label`
+  text-transform: capitalize;
+`
 
 const StyledField = styled.input`
   border: none;
@@ -25,6 +27,12 @@ const StyledField = styled.input`
   }
 `
 
+const ErrorMsg = styled.p`
+  color: red;
+  margin: 0;
+  padding: 0;
+`
+
 export default function FormField(props) {
   return (
     <FormFieldWrapper>
@@ -33,9 +41,10 @@ export default function FormField(props) {
         type="text"
         component={StyledField}
         name={props.name}
-        onChange={props.handleChange}
-        onBlur={props.handleBlur}
+        onChange={props.onChange(props.id ? props.id : props.name)}
+        onBlur={props.onBlur(props.id ? props.id : props.name)}
       />
+      <ErrorMsg>{props.error && props.touched ? props.error : null}</ErrorMsg>
     </FormFieldWrapper>
   )
 }

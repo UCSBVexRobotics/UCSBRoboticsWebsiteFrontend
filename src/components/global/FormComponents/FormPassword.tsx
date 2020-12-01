@@ -11,7 +11,9 @@ const FormFieldWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-const StyledLabel = styled.label``
+const StyledLabel = styled.label`
+  text-transform: capitalize;
+`
 
 const StyledField = styled.input`
   border: none;
@@ -31,6 +33,12 @@ const InputWrapper = styled.div`
   width: 100%;
 `
 
+const ErrorMsg = styled.p`
+  color: red;
+  margin: 0;
+  padding: 0;
+`
+
 export default function FormPassword(props) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,11 +50,12 @@ export default function FormPassword(props) {
           type={showPassword ? "text" : "password"}
           component={StyledField}
           name={props.name}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
+          onChange={props.onChange(props.id ? props.id : props.name)}
+          onBlur={props.onBlur(props.id ? props.id : props.name)}
         />
         <EyeFill height="20px" onClick={() => setShowPassword(!showPassword)}/>
       </InputWrapper>
+      <ErrorMsg>{props.error && props.touched ? props.error : null}</ErrorMsg>
     </FormFieldWrapper>
   )
 }
