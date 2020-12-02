@@ -24,17 +24,25 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid Email")
     .required("Required"),
+  /*
+    If you type in a password and then delete it there is a big error...
+  */
   password: Yup.string()
     .min(8, "Password must be 8 characters or longer")
     .max(15, "Password must be 15 characters or shorter")
+    .matches(/[0-9]/, "Must include a number")
+    .matches(/[a-z]/i, "Must include a character")
+    .matches(/[A-Z]/, "Must include a capital letter")
+    .test("Includes", "Cannot include special characters", val => !val.match(/[!@#$%^&*()-+_=<>,.]/))
     .required("Required"),
-  /* 
-  
-  TODO: Password confirmation
-  
+  /*
+    This is the only thing I could get to work:
   */
-  verifyPassword: Yup.string()
-    .required("Required")
+  verifyPassword: Yup.string().when(["password"], (password, schema, { originalValue }) => {
+    return originalValue && originalValue === password
+        ? Yup.string().required("Required")
+        : Yup.string().test("", "Passwords do not match", () => false);
+  })
 });
 
 /*
@@ -104,7 +112,7 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
             />
             <SubmitButton name="Signup" disabled={isSubmitting} />
             <CreateAccountLink>
-              Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
+              Have an account? Click <a onClick={() => {closeModal(); openLoginModal()}}>here</a> to sign in!
             </CreateAccountLink>
           </Form>
         )}

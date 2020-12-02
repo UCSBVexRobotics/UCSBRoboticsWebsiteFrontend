@@ -84,19 +84,6 @@ export default function NavBar() {
     ForgotPassword: false
   });
 
-  useEffect(() => {
-    if (isModalOpen.Login || isModalOpen.Signup || isModalOpen.ForgotPassword) {
-      document.body.style.overflow="hidden";
-
-      // this makes the content not move but the navbar still does
-      // document.body.style.paddingRight = '18px';
-    }
-    else {
-      document.body.style.overflow="unset";
-      // document.body.style.paddingRight = '0px';
-    }
-  }, [isModalOpen.Login, isModalOpen.Signup, isModalOpen.ForgotPassword]);
-
   const setIsLoginModalOpen = (val) => setIsModalOpen({ Login: val, Signup: false, ForgotPassword: false });
   const setIsSignupModalOpen = (val) => setIsModalOpen({ Login: false, Signup: val, ForgotPassword: false });
   const setIsForgotPasswordModalOpen = (val) => setIsModalOpen({ Login: false, Signup: false, ForgotPassword: val });

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { Close } from "@styled-icons/material-outlined/Close"
 
@@ -53,9 +53,43 @@ const ModalContent = styled.div`
   width: 100%;
   height: 100%;
 `
+
 export default function Modal(props) {
+  const wrapperRef = useRef(null);
+
+  /*
+    Click outside of modal exits
+  */
+  useEffect(() => {
+    let handleClickOutside = event => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        props.closeModal();
+      }
+    };
+    document.addEventListener("mouseup", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+    };
+  }, [wrapperRef]);
+
+  /*
+    Disable scroll while in modal:
+  */
+  useEffect(() => {
+    let disableScroll = e => e.preventDefault();
+
+    if (props.isOpen) {
+      window.addEventListener("wheel", disableScroll, { passive: false });
+    }
+
+    return () => {
+      window.removeEventListener("wheel", disableScroll, false);
+    }
+  }, [props.isOpen])
+
   return (
-    <ModalBackground visible={props.isOpen}>
+    <ModalBackground visible={props.isOpen} ref={wrapperRef}>
       <ModalContainer>
         <StyledClose size="50" onClick={() => props.closeModal()} />
         <ModalBody>
