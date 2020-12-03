@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import LoginModal from "./global/LoginModal"
 import SignupModal from "./global/SignupModal"
 import ForgotPasswordModal from "./global/ForgotPasswordModal"
 import LogoCircle from "../../static/logoCircle.png"
+
+import {UserValues} from "./global/UserValuesContext";
 
 const NavBarContainer = styled.div`
   height: 100px;
@@ -90,6 +92,9 @@ export default function NavBar() {
 
   return (
     <NavBarContainer id="nav-bar-container">
+      <UserValues>
+      {
+      isModalOpen.Login ?
       <LoginModal
         isOpen={isModalOpen.Login}
         openSignupModal={() => setIsSignupModalOpen(true)}
@@ -97,12 +102,20 @@ export default function NavBar() {
         closeModal={() => setIsLoginModalOpen(false)}
         title="Login"
       />
+      : null
+      }
+      {
+      isModalOpen.Signup ? 
       <SignupModal
         isOpen={isModalOpen.Signup}
         openLoginModal={() => setIsLoginModalOpen(true)}
         closeModal={() => setIsSignupModalOpen(false)}
         title="Signup"
       />
+      : null
+      }
+      {
+      isModalOpen.ForgotPassword ?
       <ForgotPasswordModal
         isOpen={isModalOpen.ForgotPassword}
         openLoginModal={() => setIsLoginModalOpen(true)}
@@ -110,6 +123,9 @@ export default function NavBar() {
         closeModal={() => setIsForgotPasswordModalOpen(false)}
         title="Forgot Password"
       />
+      : null 
+      }
+      </UserValues>
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
           <Link to="/" className="nav-link">
@@ -134,7 +150,7 @@ export default function NavBar() {
           </NavLink>
           <LoginLink
             className="nav-link"
-            onClick={() => setIsLoginModalOpen(!isModalOpen.Login)}
+            onClick={() => setIsLoginModalOpen(true)}
           >
             Login
           </LoginLink>

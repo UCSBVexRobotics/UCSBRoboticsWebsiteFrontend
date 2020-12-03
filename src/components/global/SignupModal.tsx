@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
 import Form from "./FormComponents/Form"
 import FormField from "./FormComponents/FormField"
 import FormPassword from "./FormComponents/FormPassword"
 import SubmitButton from "./FormComponents/SubmitButton"
+import { UserValuesContext } from "./UserValuesContext";
 import Modal from "./Modal"
 
 import * as Yup from "yup";
@@ -14,6 +15,10 @@ const CreateAccountLink = styled.p`
   margin: 0;
   font-size: 15px;
   margin-left: 15px;
+
+  & > a {
+    color: blue;
+  }
 `
 
 const SignupSchema = Yup.object().shape({
@@ -24,36 +29,34 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid Email")
     .required("Required"),
-  /*
-    If you type in a password and then delete it there is a big error...
-  */
   password: Yup.string()
     .min(8, "Password must be 8 characters or longer")
     .max(15, "Password must be 15 characters or shorter")
     .matches(/[0-9]/, "Must include a number")
     .matches(/[a-z]/i, "Must include a character")
     .matches(/[A-Z]/, "Must include a capital letter")
-    .test("Includes", "Cannot include special characters", val => !val.match(/[!@#$%^&*()-+_=<>,.]/))
+    .test("Includes", "Required", val => val)
+    // need to check val exists, but if it doesn't then you get this error which is why we have previous test:
+    .test("Includes", "Cannot include special characters", val => val && !val.match(/[!@#$%^&*()-+_=<>,.]/))
     .required("Required"),
-  /*
-    This is the only thing I could get to work:
-  */
-  verifyPassword: Yup.string().when(["password"], (password, schema, { originalValue }) => {
-    return originalValue && originalValue === password
-        ? Yup.string().required("Required")
-        : Yup.string().test("", "Passwords do not match", () => false);
-  })
+  
+    // This is the only thing I could get to work:
+  verifyPassword: Yup.string()
+    .when(["password"], (password, schema, { originalValue }) => {
+      return originalValue && password && originalValue === password
+          ? Yup.string().required("Required")
+          : Yup.string().test("", "Passwords do not match", () => false);
+    })
+    .required("Required")
 });
 
-/*
-- There's too many fields that it cuts off the X in the top right
-*/
-
 export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
+  const [userValues, updateUserValues] = useContext(UserValuesContext);
+  
   return (
     <Modal title="Signup" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "", password: "", verifyPassword: "" }}
+        initialValues={userValues}
         onSubmit={() => console.log("Signed up!")}
         validationSchema={SignupSchema}
       >
@@ -65,7 +68,12 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
           handleBlur,
           handleSubmit,
           isSubmitting,
-        }) => (
+        }) => {
+          useEffect(() => {
+            updateUserValues(values);
+          }, [values])
+
+          return (
           <Form onSubmit={handleSubmit}>
             <FormField
               name="First Name"
@@ -112,10 +120,11 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
             />
             <SubmitButton name="Signup" disabled={isSubmitting} />
             <CreateAccountLink>
-              Have an account? Click <a onClick={() => {closeModal(); openLoginModal()}}>here</a> to sign in!
+              Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
             </CreateAccountLink>
           </Form>
-        )}
+          )}
+        }
       </Formik>
     </Modal>
   )

@@ -3,6 +3,7 @@ import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
 
 import background from "../../../static/background_transparent.svg";
+import car from "../../../static/car.svg";
 
 const Section = styled.div`
   display: flex;
@@ -57,7 +58,7 @@ export default function AboutUsSection() {
           interested in a self-motivated collaboration experience.
         </Text>
         <ImgWrapper>
-          <Img src={background} />
+          <Img src={car} />
         </ImgWrapper>
       </Section>
     </HomeContainer>

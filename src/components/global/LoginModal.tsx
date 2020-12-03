@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
 import Form from "./FormComponents/Form"
@@ -6,12 +6,17 @@ import FormField from "./FormComponents/FormField"
 import FormPassword from "./FormComponents/FormPassword"
 import SubmitButton from "./FormComponents/SubmitButton"
 import Modal from "./Modal"
+import { UserValuesContext } from "./UserValuesContext";
 import * as Yup from 'yup';
 
 const CreateAccountLink = styled.p`
   margin: 0;
   font-size: 15px;
   margin-left: 15px;
+
+  & > a {
+    color: blue;
+  }
 `
 
 const LoginSchema = Yup.object().shape({
@@ -23,10 +28,12 @@ const LoginSchema = Yup.object().shape({
 });
 
 export default function LoginModal({ isOpen, openSignupModal, openForgotPasswordModal, closeModal }) {
+  const [userValues, updateUserValues] = useContext(UserValuesContext);
+
   return (
     <Modal title="Login" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={userValues}
         onSubmit={() => console.log("Logged in!")}
         validationSchema={LoginSchema}
       >
@@ -38,7 +45,12 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
           handleBlur,
           handleSubmit,
           isSubmitting,
-        }) => (
+        }) => {
+          useEffect(() => {
+            updateUserValues(values);
+          }, [values])
+
+          return (
           <Form onSubmit={handleSubmit}>
             <FormField
               name="email"
@@ -64,7 +76,7 @@ export default function LoginModal({ isOpen, openSignupModal, openForgotPassword
               Forgot password? Click <a onClick={() => openForgotPasswordModal()}>here</a>!
             </CreateAccountLink>
           </Form>
-        )}
+        )}}
       </Formik>
     </Modal>
   )

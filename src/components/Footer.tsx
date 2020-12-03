@@ -139,22 +139,22 @@ export default function Footer() {
       <LinkContainer>
         <Column>
           <Ct>Club</Ct>
-          <Ci to="/">About Us</Ci>
+          <Ci to="/About-Us">About Us</Ci>
           <Ci to="/Projects">Projects</Ci>
           <Ci to="/Calendar">Calendar</Ci>
         </Column>
         <Column>
           <Ct>Projects</Ct>
-          <Ci to="/">Electrical Team</Ci>
-          <Ci to="/">Mechanical Team</Ci>
-          <Ci to="/">Software Team</Ci>
-          <Ci to="/">Web Design Team</Ci>
+          <Ci to="/projects/electrical">Electrical Team</Ci>
+          <Ci to="/projects/mechanical">Mechanical Team</Ci>
+          <Ci to="/projects/software">Software Team</Ci>
+          <Ci to="/projects/web">Web Design Team</Ci>
         </Column>
         <Column>
           <Ct>Members</Ct>
-          <Ci to="/">Dashboard</Ci>
-          <Ci to="/">Profile</Ci>
-          <Ci to="/">Store</Ci>
+          <Ci to="/dashboard">Dashboard</Ci>
+          <Ci to="/profile">Profile</Ci>
+          <Ci to="/store">Store</Ci>
         </Column>
         <Column>
           <Ct>Connect</Ct>

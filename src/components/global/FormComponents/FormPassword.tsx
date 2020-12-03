@@ -50,6 +50,7 @@ export default function FormPassword(props) {
           type={showPassword ? "text" : "password"}
           component={StyledField}
           name={props.name}
+          value={props.value}
           onChange={props.onChange(props.id ? props.id : props.name)}
           onBlur={props.onBlur(props.id ? props.id : props.name)}
         />

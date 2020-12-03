@@ -41,6 +41,7 @@ export default function FormField(props) {
         type="text"
         component={StyledField}
         name={props.name}
+        value={props.value}
         onChange={props.onChange(props.id ? props.id : props.name)}
         onBlur={props.onBlur(props.id ? props.id : props.name)}
       />
