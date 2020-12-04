@@ -15,6 +15,7 @@ const NavBarContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  z-index: 100;
 `
 
 const NavBarInnerContainer = styled.div`

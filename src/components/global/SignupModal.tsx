@@ -56,7 +56,7 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
   return (
     <Modal title="Signup" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={userValues}
+        initialValues={{...userValues, verifyPassword: ""}}
         onSubmit={() => console.log("Signed up!")}
         validationSchema={SignupSchema}
       >
@@ -74,57 +74,57 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
           }, [values])
 
           return (
-          <Form onSubmit={handleSubmit}>
-            <FormField
-              name="First Name"
-              id="firstName"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.firstName}
-              error={errors.firstName}
-              touched={touched.firstName}
-            />
-            <FormField
-              name="Last Name"
-              id="lastName"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.lastName}
-              error={errors.lastName}
-              touched={touched.lastName}
-            />
-            <FormField
-              name="email"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.email}
-              error={errors.email}
-              touched={touched.email}
-            />
-            <FormPassword
-              name="password"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.password}
-              error={errors.password}
-              touched={touched.password}
-            />
-            <FormPassword
-              name="Verify Password"
-              id="verifyPassword"
-              onChange={e => handleChange(e)}
-              onBlur={e => handleBlur(e)}
-              value={values.verifyPassword}
-              error={errors.verifyPassword}
-              touched={touched.verifyPassword}
-            />
-            <SubmitButton name="Signup" disabled={isSubmitting} />
-            <CreateAccountLink>
-              Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
-            </CreateAccountLink>
-          </Form>
-          )}
-        }
+            <Form onSubmit={handleSubmit}>
+              <FormField
+                name="First Name"
+                id="firstName"
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e)}
+                value={values.firstName}
+                error={errors.firstName}
+                touched={touched.firstName}
+              />
+              <FormField
+                name="Last Name"
+                id="lastName"
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e)}
+                value={values.lastName}
+                error={errors.lastName}
+                touched={touched.lastName}
+              />
+              <FormField
+                name="email"
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e)}
+                value={values.email}
+                error={errors.email}
+                touched={touched.email}
+              />
+              <FormPassword
+                name="password"
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e)}
+                value={values.password}
+                error={errors.password}
+                touched={touched.password}
+              />
+              <FormPassword
+                name="Verify Password"
+                id="verifyPassword"
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e)}
+                value={values.verifyPassword}
+                error={errors.verifyPassword}
+                touched={touched.verifyPassword}
+              />
+              <SubmitButton name="Signup" disabled={isSubmitting} />
+              <CreateAccountLink>
+                Have an account? Click <a onClick={() => openLoginModal()}>here</a> to sign in!
+              </CreateAccountLink>
+            </Form>
+          )
+        }}
       </Formik>
     </Modal>
   )

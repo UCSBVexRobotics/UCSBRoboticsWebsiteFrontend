@@ -7,8 +7,7 @@ export const UserValues = (props) => {
         firstName: "", 
         lastName: "", 
         email: "", 
-        password: "", 
-        verifyPassword: "" 
+        password: ""
       })
 
     const updateUserValues = (newValues) => {
