@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import LoginModal from "./global/LoginModal"
@@ -56,22 +56,25 @@ function toTopOfPage() {
 
 export default function NavBar() {
   //Function to change the overlay of the navbar once scroll past a 100px
-  window.onscroll = () => {
-    var navLink = document.getElementsByClassName("nav-link")
-    if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
-    ) {
-      document.getElementById("nav-bar-container").style.backgroundColor =
-        "rgba(255, 255, 255, 0.7)"
-      for (var i = 0; i < navLink.length; i++)
-        navLink[i].style.color = "#003384"
-    } else {
-      document.getElementById("nav-bar-container").style.backgroundColor =
-        "transparent"
-      for (var i = 0; i < navLink.length; i++) navLink[i].style.color = "white"
+  useEffect(() => {
+    window.onscroll = () => {
+      var navLink = document.getElementsByClassName("nav-link")
+      if (
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
+      ) {
+        document.getElementById("nav-bar-container").style.backgroundColor =
+          "rgba(255, 255, 255, 0.7)"
+        for (var i = 0; i < navLink.length; i++)
+          navLink[i].style.color = "#003384"
+      } else {
+        document.getElementById("nav-bar-container").style.backgroundColor =
+          "transparent"
+        for (var i = 0; i < navLink.length; i++)
+          navLink[i].style.color = "white"
+      }
     }
-  }
+  })
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
