@@ -13,9 +13,13 @@ const CreateAccountLink = styled.p`
   margin-left: 15px;
 `
 
-export default function LoginModal({ isOpen }) {
+export default function LoginModal(props) {
   return (
-    <Modal title="Login" isOpen={isOpen}>
+    <Modal
+      title="Login"
+      isOpen={props.isOpen}
+      closeModal={() => props.closeModal()}
+    >
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={() => console.log("Logged in!")}

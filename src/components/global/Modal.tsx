@@ -32,6 +32,7 @@ const StyledClose = styled(Close)`
   align-self: flex-end;
   padding-top: 15px;
   padding-right: 15px;
+  cursor: pointer;
 `
 
 const ModalBody = styled.div`
@@ -57,7 +58,7 @@ export default function Modal(props) {
   return (
     <ModalBackground visible={props.isOpen}>
       <ModalContainer>
-        <StyledClose size="50" onClick={() => props.closeModal} />
+        <StyledClose size="50" onClick={() => props.closeModal()} />
         <ModalBody>
           <ModalTitle>{props.title}</ModalTitle>
           <ModalContent>{props.children}</ModalContent>

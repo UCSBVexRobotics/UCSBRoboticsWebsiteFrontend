@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   border: 1px solid white;
   border-radius: 7px;
   outline: none;
+  cursor: pointer;
 
   &:hover {
     background-color: transparent;

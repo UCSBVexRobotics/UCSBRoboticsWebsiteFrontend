@@ -96,7 +96,7 @@ export default function NavBar() {
           </NavLink>
           <NavLink>
             <Link to="/Calendar" className="nav-link">
-              Calendar
+              Test
             </Link>
           </NavLink>
           <NavLink>
