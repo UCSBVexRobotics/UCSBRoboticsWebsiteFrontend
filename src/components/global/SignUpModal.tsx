@@ -1,11 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { navigate } from "gatsby"
 import { Formik, Field } from "formik"
 import SubmitButton from "./FormComponents/SubmitButton"
 import Modal from "./Modal"
-import Profile from "../../pages/Profile"
-import { handleLogin } from "../../services/auth"
 
 const FormFieldWrapper = styled.div`
   margin: 3%;
@@ -30,13 +27,13 @@ const StyledField = styled.input`
   }
 `
 
-const CreateAccountText = styled.p`
+const SignUpText = styled.p`
   margin: 0;
   font-size: 15px;
   margin-left: 15px;
 `
 
-const CreateAccountLink = styled.a`
+const SignUpLink = styled.a`
   :hover {
     text-decoration: underline;
   }
@@ -45,12 +42,18 @@ const CreateAccountLink = styled.a`
 export default function LoginModal(props) {
   return (
     <Modal
-      title="Login"
+      title="Sign up"
       isOpen={props.isOpen}
       closeModal={() => props.closeModal()}
     >
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          verifyPassword: "",
+        }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2))
@@ -68,6 +71,28 @@ export default function LoginModal(props) {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
+            <FormFieldWrapper>
+              <StyledLabel htmlFor="firstName">First Name</StyledLabel>
+              <Field
+                id="firstName"
+                type="text"
+                component={StyledField}
+                name="firstName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormFieldWrapper>
+            <FormFieldWrapper>
+              <StyledLabel htmlFor="lastName">Last Name</StyledLabel>
+              <Field
+                id="lastName"
+                type="text"
+                component={StyledField}
+                name="lastName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormFieldWrapper>
             <FormFieldWrapper>
               <StyledLabel htmlFor="email">Email</StyledLabel>
               <Field
@@ -90,14 +115,27 @@ export default function LoginModal(props) {
                 onBlur={handleBlur}
               />
             </FormFieldWrapper>
-            <SubmitButton name="Login" disabled={isSubmitting} />
-            <CreateAccountText>
-              Don't have an account yet? Click{" "}
-              <CreateAccountLink onClick={() => props.changeToSignUpModal()}>
+            <FormFieldWrapper>
+              <StyledLabel htmlFor="verifyPassword">
+                Verify Password
+              </StyledLabel>
+              <Field
+                id="verifyPassword"
+                type="password"
+                component={StyledField}
+                name="verifyPassword"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormFieldWrapper>
+            <SubmitButton name="Create account" disabled={isSubmitting} />
+            <SignUpText>
+              Already have an account? Click{" "}
+              <SignUpLink onClick={() => props.changeToLoginModal()}>
                 here
-              </CreateAccountLink>{" "}
-              to create one!
-            </CreateAccountText>
+              </SignUpLink>{" "}
+              to login!
+            </SignUpText>
           </form>
         )}
       </Formik>

@@ -20,5 +20,9 @@ const StyledButton = styled.button`
 `
 
 export default function SubmitButton(props) {
-  return <StyledButton disabled={props.disabled}>{props.name}</StyledButton>
+  return (
+    <StyledButton type="submit" disabled={props.disabled}>
+      {props.name}
+    </StyledButton>
+  )
 }

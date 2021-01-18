@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import LoginModal from "./global/LoginModal"
+import SignUpModal from "./global/SignUpModal"
 import LogoCircle from "../../static/logoCircle.png"
 
 const NavBarContainer = styled.div`
@@ -48,6 +49,7 @@ const NavLink = styled.div`
 
 const LoginLink = styled(NavLink)`
   cursor: pointer;
+  color: white;
 `
 
 function toTopOfPage() {
@@ -76,14 +78,28 @@ export default function NavBar() {
     }
   })
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
 
   return (
     <NavBarContainer id="nav-bar-container">
       <LoginModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
+        isOpen={isLoginModalOpen}
+        closeModal={() => setIsLoginModalOpen(false)}
+        changeToSignUpModal={() => {
+          setIsLoginModalOpen(false)
+          setIsSignUpModalOpen(true)
+        }}
         title="Login"
+      />
+      <SignUpModal
+        isOpen={isSignUpModalOpen}
+        closeModal={() => setIsSignUpModalOpen(false)}
+        changeToLoginModal={() => {
+          setIsSignUpModalOpen(false)
+          setIsLoginModalOpen(true)
+        }}
+        title="Create account"
       />
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
@@ -94,12 +110,12 @@ export default function NavBar() {
         <LinksContainer>
           <NavLink>
             <Link to="/Projects" className="nav-link">
-              About
+              Projects
             </Link>
           </NavLink>
           <NavLink>
             <Link to="/Calendar" className="nav-link">
-              Test
+              Calendar
             </Link>
           </NavLink>
           <NavLink>
@@ -109,7 +125,7 @@ export default function NavBar() {
           </NavLink>
           <LoginLink
             className="nav-link"
-            onClick={() => setIsModalOpen(!isModalOpen)}
+            onClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
           >
             Login
           </LoginLink>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import HomeContainer from "../global/HomeContainer"
+import HomeContainer from "../Home/HomeContainer"
 import styled from "styled-components"
 import LogoCircle from "../../../static/logoCircle.png"
 import FlipBox from "../Home/FlipBox"
