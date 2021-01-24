@@ -114,6 +114,10 @@ const ColumnItemText = styled.p`
   margin: 0;
 `
 
+function toTopOfPage() {
+  window.scrollTo(0, 0)
+}
+
 export default function Footer() {
   const Ci = props => {
     return (
@@ -133,8 +137,8 @@ export default function Footer() {
   return (
     <FooterContainer>
       <LogoContainer>
-        <Image src={LogoCircle} />
-        <ClubName>UCSB ROBOTICS CLUB</ClubName>
+        <Link to="/" onClick={() => toTopOfPage()}><Image src={LogoCircle} /></Link>
+        <Link to="/" onClick={() => toTopOfPage()}><ClubName>UCSB ROBOTICS CLUB</ClubName></Link>
       </LogoContainer>
       <LinkContainer>
         <Column>
