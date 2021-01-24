@@ -1,9 +1,24 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
     body {
-        font-family: 'Arial';
         margin: 0;
+        font-family: 'Arial'
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+    }
+
+    //Disable being able to drag an image
+    img,
+    a {
+        user-drag: none; 
+        -webkit-user-drag: none;
     }
 
     h3 {
@@ -16,7 +31,14 @@ const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
-    }
-`;
 
+        &:link {
+            color: white;
+        }
+
+        &:visited { 
+            color: white;
+        }
+    }
+`
 export default GlobalStyle
