@@ -19,7 +19,7 @@ const ModalBackground = styled.div`
 
 const ModalContainer = styled.div`
   background-color: white;
-//  height: 600px;
+  //  height: 600px;
   width: 600px;
   border: 1px white;
   border-radius: 20px;
@@ -56,7 +56,7 @@ const ModalContent = styled.div`
 `
 
 export default function Modal(props) {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef(null)
 
   /*
     Click outside of modal exits
@@ -64,30 +64,30 @@ export default function Modal(props) {
   useEffect(() => {
     let handleClickOutside = event => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        props.closeModal();
+        props.closeModal()
       }
-    };
-    document.addEventListener("click", handleClickOutside, true);
+    }
+    document.addEventListener("click", handleClickOutside, true)
 
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, [props.isOpen]);
+      document.removeEventListener("click", handleClickOutside, true)
+    }
+  }, [props.isOpen])
 
   /*
     Disable scroll while in modal:
   */
   useEffect(() => {
-    let disableScroll = e => e.preventDefault();
+    let disableScroll = e => e.preventDefault()
 
     if (props.isOpen) {
-      window.addEventListener("wheel", disableScroll, { passive: false });
-      window.addEventListener("touchmove", disableScroll, { passive: false });
+      window.addEventListener("wheel", disableScroll, { passive: false })
+      window.addEventListener("touchmove", disableScroll, { passive: false })
     }
 
     return () => {
-      window.removeEventListener("wheel", disableScroll, false);
-      window.removeEventListener("touchmove", disableScroll, false);
+      window.removeEventListener("wheel", disableScroll, false)
+      window.removeEventListener("touchmove", disableScroll, false)
     }
   }, [wrapperRef])
 
