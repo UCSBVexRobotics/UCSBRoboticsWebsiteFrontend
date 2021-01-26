@@ -54,7 +54,7 @@ export default function ForgotPasswordModal({
           }, [values])
 
           return (
-            <Form onSubmit={handleSubmit}>
+            <Form handleSubmit={handleSubmit}>
               <FormField
                 name="email"
                 onChange={e => handleChange(e)}

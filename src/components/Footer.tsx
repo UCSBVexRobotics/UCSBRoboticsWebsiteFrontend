@@ -22,7 +22,6 @@ const LogoContainer = styled.div`
 const ClubName = styled.h2`
   word-wrap: no;
   color: white;
-  cursor: default;
 `
 const Image = styled.img`
   width: 100px;
@@ -137,8 +136,12 @@ export default function Footer() {
   return (
     <FooterContainer>
       <LogoContainer>
-        <Link to="/" onClick={() => toTopOfPage()}><Image src={LogoCircle} /></Link>
-        <Link to="/" onClick={() => toTopOfPage()}><ClubName>UCSB ROBOTICS CLUB</ClubName></Link>
+        <Link to="/" onClick={() => toTopOfPage()}>
+          <Image src={LogoCircle} />
+        </Link>
+        <Link to="/" onClick={() => toTopOfPage()}>
+          <ClubName>UCSB ROBOTICS CLUB</ClubName>
+        </Link>
       </LogoContainer>
       <LinkContainer>
         <Column>
@@ -157,7 +160,7 @@ export default function Footer() {
         <Column>
           <Ct>Members</Ct>
           <Ci to="/dashboard">Dashboard</Ci>
-          <Ci to="/profile">Profile</Ci>
+          <Ci to="/Profile">Profile</Ci>
           <Ci to="/store">Store</Ci>
         </Column>
         <Column>

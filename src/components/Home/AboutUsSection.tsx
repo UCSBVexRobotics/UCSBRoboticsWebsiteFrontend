@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import HomeContainer from "../global/HomeContainer"
 import styled from "styled-components"
 
-import background from "../../../static/background_transparent.svg";
-import car from "../../../static/car.svg";
+import background from "../../../static/background_transparent.svg"
+import car from "../../../static/car.svg"
 
 const Section = styled.div`
   display: flex;
@@ -45,10 +45,10 @@ const Img = styled.img`
 `
 
 const ImgBox = styled.div`
-/*  &:hover {
+  /*  &:hover {
     transform: rotateY(180deg);
   }*/
-  transform: rotateY(${props => (props.flip ? 180 : 0)}deg); 
+  transform: rotateY(${props => (props.flip ? 180 : 0)}deg);
 
   width: 300px;
   height: 250px;
@@ -72,11 +72,11 @@ const BoxBack = styled.div`
 `
 
 export default function AboutUsSection() {
-  const [flip, setFlip] = useState(false);
+  const [flip, setFlip] = useState(false)
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setFlip(!flip);
+      setFlip(!flip)
     }, 15000)
 
     return () => {

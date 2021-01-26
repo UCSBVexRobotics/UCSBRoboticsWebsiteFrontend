@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   border: 1px solid white;
   border-radius: 7px;
   outline: none;
+  cursor: pointer;
 
   &:hover {
     background-color: transparent;
@@ -19,5 +20,9 @@ const StyledButton = styled.button`
 `
 
 export default function SubmitButton(props) {
-  return <StyledButton disabled={props.disabled}>{props.name}</StyledButton>
+  return (
+    <StyledButton disabled={props.disabled} type="submit">
+      {props.name}
+    </StyledButton>
+  )
 }

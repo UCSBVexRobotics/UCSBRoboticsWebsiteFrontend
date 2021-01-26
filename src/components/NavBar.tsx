@@ -6,7 +6,7 @@ import SignupModal from "./global/SignupModal"
 import ForgotPasswordModal from "./global/ForgotPasswordModal"
 import LogoCircle from "../../static/logoCircle.png"
 
-import {UserValues} from "./global/UserValuesContext";
+import { UserValues } from "./global/UserValuesContext"
 
 const NavBarContainer = styled.div`
   height: 100px;
@@ -45,6 +45,7 @@ const NavLink = styled.div`
   margin: 0 30px;
   font-weight: lighter;
   letter-spacing: 0.2em;
+  color: white;
 
   &:hover {
     opacity: 0.5;
@@ -84,48 +85,47 @@ export default function NavBar() {
   const [isModalOpen, setIsModalOpen] = useState({
     Login: false,
     Signup: false,
-    ForgotPassword: false
-  });
+    ForgotPassword: false,
+  })
 
-  const setIsLoginModalOpen = (val) => setIsModalOpen({ Login: val, Signup: false, ForgotPassword: false });
-  const setIsSignupModalOpen = (val) => setIsModalOpen({ Login: false, Signup: val, ForgotPassword: false });
-  const setIsForgotPasswordModalOpen = (val) => setIsModalOpen({ Login: false, Signup: false, ForgotPassword: val });
+  const setIsLoginModalOpen = val =>
+    setIsModalOpen({ Login: val, Signup: false, ForgotPassword: false })
+  const setIsSignupModalOpen = val =>
+    setIsModalOpen({ Login: false, Signup: val, ForgotPassword: false })
+  const setIsForgotPasswordModalOpen = val =>
+    setIsModalOpen({ Login: false, Signup: false, ForgotPassword: val })
+
+  const LoggedIn = false
 
   return (
     <NavBarContainer id="nav-bar-container">
       <UserValues>
-      {
-      isModalOpen.Login ?
-      <LoginModal
-        isOpen={isModalOpen.Login}
-        openSignupModal={() => setIsSignupModalOpen(true)}
-        openForgotPasswordModal={() => setIsForgotPasswordModalOpen(true)}
-        closeModal={() => setIsLoginModalOpen(false)}
-        title="Login"
-      />
-      : null
-      }
-      {
-      isModalOpen.Signup ? 
-      <SignupModal
-        isOpen={isModalOpen.Signup}
-        openLoginModal={() => setIsLoginModalOpen(true)}
-        closeModal={() => setIsSignupModalOpen(false)}
-        title="Signup"
-      />
-      : null
-      }
-      {
-      isModalOpen.ForgotPassword ?
-      <ForgotPasswordModal
-        isOpen={isModalOpen.ForgotPassword}
-        openLoginModal={() => setIsLoginModalOpen(true)}
-        openSignupModal={() => setIsSignupModalOpen(true)}
-        closeModal={() => setIsForgotPasswordModalOpen(false)}
-        title="Forgot Password"
-      />
-      : null 
-      }
+        {isModalOpen.Login ? (
+          <LoginModal
+            isOpen={isModalOpen.Login}
+            openSignupModal={() => setIsSignupModalOpen(true)}
+            openForgotPasswordModal={() => setIsForgotPasswordModalOpen(true)}
+            closeModal={() => setIsLoginModalOpen(false)}
+            title="Login"
+          />
+        ) : null}
+        {isModalOpen.Signup ? (
+          <SignupModal
+            isOpen={isModalOpen.Signup}
+            openLoginModal={() => setIsLoginModalOpen(true)}
+            closeModal={() => setIsSignupModalOpen(false)}
+            title="Signup"
+          />
+        ) : null}
+        {isModalOpen.ForgotPassword ? (
+          <ForgotPasswordModal
+            isOpen={isModalOpen.ForgotPassword}
+            openLoginModal={() => setIsLoginModalOpen(true)}
+            openSignupModal={() => setIsSignupModalOpen(true)}
+            closeModal={() => setIsForgotPasswordModalOpen(false)}
+            title="Forgot Password"
+          />
+        ) : null}
       </UserValues>
       <NavBarInnerContainer>
         <Title onClick={() => toTopOfPage()}>
@@ -149,12 +149,25 @@ export default function NavBar() {
               Contact
             </Link>
           </NavLink>
-          <LoginLink
-            className="nav-link"
-            onClick={() => setIsLoginModalOpen(true)}
-          >
-            Login
-          </LoginLink>
+          {LoggedIn ? (
+            <>
+              <NavLink>
+                <Link to="/Profile" className="nav-link">
+                  Dashboard
+                </Link>
+              </NavLink>
+              <LoginLink className="nav-link" onClick={() => alert("signout")}>
+                Sign Out
+              </LoginLink>
+            </>
+          ) : (
+            <LoginLink
+              className="nav-link"
+              onClick={() => setIsLoginModalOpen(true)}
+            >
+              Login
+            </LoginLink>
+          )}
         </LinksContainer>
       </NavBarInnerContainer>
     </NavBarContainer>

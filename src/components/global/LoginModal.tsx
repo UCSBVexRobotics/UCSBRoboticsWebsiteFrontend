@@ -36,7 +36,13 @@ export default function LoginModal({
     <Modal title="Login" isOpen={isOpen} closeModal={closeModal}>
       <Formik
         initialValues={userValues}
-        onSubmit={() => console.log("Logged in!")}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            console.log(values)
+            setSubmitting(false)
+            alert("HERE")
+          })
+        }}
         validationSchema={LoginSchema}
       >
         {({
@@ -53,7 +59,7 @@ export default function LoginModal({
           }, [values])
 
           return (
-            <Form onSubmit={handleSubmit}>
+            <Form handleSubmit={handleSubmit}>
               <FormField
                 name="email"
                 onChange={e => handleChange(e)}

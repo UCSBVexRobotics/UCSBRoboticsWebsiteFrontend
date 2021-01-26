@@ -74,7 +74,7 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
           }, [values])
 
           return (
-            <Form onSubmit={handleSubmit}>
+            <Form handleSubmit={handleSubmit}>
               <FormField
                 name="First Name"
                 id="firstName"

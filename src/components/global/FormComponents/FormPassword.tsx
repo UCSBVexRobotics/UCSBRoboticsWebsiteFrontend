@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react"
 import styled from "styled-components"
 import { Field } from "formik"
-import { EyeFill } from "@styled-icons/bootstrap/EyeFill";
+import { EyeFill } from "@styled-icons/bootstrap/EyeFill"
 
 const FormFieldWrapper = styled.div`
   width: 100%;
@@ -40,7 +40,7 @@ const ErrorMsg = styled.p`
 `
 
 export default function FormPassword(props) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
     <FormFieldWrapper>
@@ -54,7 +54,7 @@ export default function FormPassword(props) {
           onChange={props.onChange(props.id ? props.id : props.name)}
           onBlur={props.onBlur(props.id ? props.id : props.name)}
         />
-        <EyeFill height="20px" onClick={() => setShowPassword(!showPassword)}/>
+        <EyeFill height="20px" onClick={() => setShowPassword(!showPassword)} />
       </InputWrapper>
       <ErrorMsg>{props.error && props.touched ? props.error : null}</ErrorMsg>
     </FormFieldWrapper>

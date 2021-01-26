@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import GlobalStyle from "../styles/globalStyles"
-import NavBar from '../components/NavBar';
+import NavBar from "../components/NavBar"
 
 const BackgroundContainer = styled.div`
   height: 200vh;
@@ -17,21 +17,20 @@ const PageContainer = styled.div`
 `
 
 export default function Calendar() {
-
   useEffect(() => {
     fetch("roboticswebsite.azurewebsites.net/api/Account/GetAccounts", {
-      "method": "GET",
-      "headers": {
+      method: "GET",
+      headers: {
         "content-encoding": "gzip",
         "content-type": "application/json; charset=utf-8",
-        "server": "Microsoft-IIS/10.0",
+        server: "Microsoft-IIS/10.0",
         "transfer-encoding": "chunked",
-        "vary": "Accept-Encoding",
-        "x-powered-by": "ASP.NET"
-      }
+        vary: "Accept-Encoding",
+        "x-powered-by": "ASP.NET",
+      },
     })
       .then(response => console.log(response))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   })
 
   return (
@@ -40,7 +39,6 @@ export default function Calendar() {
       <GlobalStyle />
       <PageContainer>
         <h1>Test</h1>
-
       </PageContainer>
     </BackgroundContainer>
   )

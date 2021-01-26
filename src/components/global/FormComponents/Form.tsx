@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
+import { Form as FormikForm } from "formik"
 
-const CustomForm = styled.form`
+const CustomForm = styled(FormikForm)`
   display: flex;
   flex-wrap: wrap;
   flex-orientation: column;
