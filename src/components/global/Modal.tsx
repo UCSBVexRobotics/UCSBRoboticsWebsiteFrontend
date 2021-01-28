@@ -15,6 +15,8 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   visibility: ${props => (props.visible ? "visible" : "hidden")};
+  color: black;
+  z-index: 1000;
 `
 
 const ModalContainer = styled.div`
@@ -33,6 +35,7 @@ const StyledClose = styled(Close)`
   align-self: flex-end;
   padding-top: 15px;
   padding-right: 15px;
+  cursor: pointer;
 `
 
 const ModalBody = styled.div`

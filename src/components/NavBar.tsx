@@ -95,6 +95,11 @@ export default function NavBar() {
   const setIsForgotPasswordModalOpen = val =>
     setIsModalOpen({ Login: false, Signup: false, ForgotPassword: val })
 
+  /*
+  
+  
+  
+  */
   const LoggedIn = false
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
 import Page from "../components/Page"
 import styled from "styled-components"
 
@@ -7,13 +6,18 @@ import { Email } from "@styled-icons/material/Email"
 import { Github } from "@styled-icons/boxicons-logos/Github"
 import { LinkedinSquare } from "@styled-icons/boxicons-logos/LinkedinSquare"
 
+import EditProfileModal from "../components/Profile/EditProfileModal"
+
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
-  color: white;
   background-red;
   width: 100%;
   height: 100%;
+  color: white;
+
+  // just to prevent nav bar overlap
+  padding-top: 80px;
 `
 
 const Content = styled.div`
@@ -48,6 +52,8 @@ const ContentHeading = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  flex-wrap: wrap;
 `
 
 const Options = styled.div`
@@ -55,13 +61,14 @@ const Options = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  flex-grow: 1;
 `
 
 const VerifyEmail = styled.div`
   width: 105px;
   height: 30px;
   background-color: red;
-  border-radius: 25px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,17 +104,6 @@ const VerifyEmail = styled.div`
   }
 `
 
-const Edit = styled.div`
-  width: 45px;
-  height: 45px;
-  background-color: orange;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-`
-
 const Name = styled.h1`
   margin: 0;
 `
@@ -119,12 +115,13 @@ const Description = styled.p`
 const Roles = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 `
 
 const Role = styled.div`
   border-radius: 10px;
   padding: 5px;
-  margin: 0 5px;
+  margin: 3px;
   display: flex;
   item-align: center;
   justify-content: center;
@@ -163,8 +160,8 @@ const Tooltip = styled.div`
 `
 
 const Circle = styled.div`
-  height: 40px;
-  width: 40px;
+  height: ${({ size }) => size}px;
+  width: ${({ size }) => size}px;
   background-color: ${({ color }) => color};
   border-radius: 50%;
 
@@ -210,49 +207,74 @@ export default function Profile() {
     }
   }, [shake])
 
-  /*OPTION TO SHOW EMAIL*/
+  const [editOpen, setEditOpen] = useState(false)
 
   return (
     <Page>
       <PageContainer>
+        {editOpen ? (
+          <EditProfileModal
+            isOpen={editOpen}
+            closeModal={() => setEditOpen(false)}
+          />
+        ) : (
+          <></>
+        )}
         <Content>
           <ContentHeading>
-            <Name>{account.firstName + " " + account.lastName}</Name>
+            <div>
+              <Name>{account.firstName + " " + account.lastName}</Name>
+              <Roles>
+                {account.role === "admin" ? <Role>Admin</Role> : null}
+                {
+                  /* We could do role stuff like this, idk */
+                  account.sRoboChip >= 35 ? (
+                    <Role>Software Team Developer</Role>
+                  ) : null
+                }
+              </Roles>
+            </div>
             <Options>
               {account.emailVerified === false ? (
                 <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
               ) : null}
-              <Edit>Edit</Edit>
+              <Circle
+                size="45"
+                color="orange"
+                onClick={() => setEditOpen(true)}
+                style={{ cursor: "pointer" }}
+              >
+                Edit
+              </Circle>
             </Options>
           </ContentHeading>
-          <Roles>
-            {account.role === "admin" ? <Role>Admin</Role> : null}
-            {account.sRoboChip >= 35 ? (
-              <Role>Software Team Developer</Role>
-            ) : null}
-          </Roles>
           {account.description ? (
             <Description>{account.description}</Description>
           ) : null}
           <LinkBar>
             {account.linkedIn ? (
-              <Link to={`https://www.linkedin.com/in/${account.linkedIn}`}>
+              <a href={`https://www.linkedin.com/in/${account.linkedIn}`}>
                 <LinkedinSquare size="40px" />
-              </Link>
+              </a>
             ) : null}
-            {account.email && false ? (
-              <Link href={`mailto:${account.email}`}>
-                <Email size="40px" />
-              </Link>
-            ) : null}
+            {
+              // AND WITH emailDisabled? OPTION
+              account.email && false ? (
+                <a href={`mailto:${account.email}`}>
+                  <Email size="40px" />
+                </a>
+              ) : null
+            }
             {account.github ? (
-              <Link to={`https://www.github.com/${account.github}`}>
+              <a href={`https://www.github.com/${account.github}`}>
                 <Github size="40px" />
-              </Link>
+              </a>
             ) : null}
             {account.mRoboChip ? (
               <Tooltip>
-                <Circle color="#24e07c">{account.mRoboChip}</Circle>
+                <Circle size="40" color="#24e07c">
+                  {account.mRoboChip}
+                </Circle>
                 <ToolTipText color="#24e07c">
                   Mechanical Team RoboChips
                 </ToolTipText>
@@ -260,7 +282,9 @@ export default function Profile() {
             ) : null}
             {account.eRoboChip ? (
               <Tooltip>
-                <Circle color="#fac739">{account.eRoboChip}</Circle>
+                <Circle size="40" color="#fac739">
+                  {account.eRoboChip}
+                </Circle>
                 <ToolTipText color="#fac739">
                   Electronical Team RoboChips
                 </ToolTipText>
@@ -268,7 +292,9 @@ export default function Profile() {
             ) : null}
             {account.sRoboChip ? (
               <Tooltip>
-                <Circle color="#2d6ae3">{account.sRoboChip}</Circle>
+                <Circle size="40" color="#2d6ae3">
+                  {account.sRoboChip}
+                </Circle>
                 <ToolTipText color="#2d6ae3">
                   Software Team RoboChips
                 </ToolTipText>
