@@ -6,8 +6,6 @@ import { Email } from "@styled-icons/material/Email"
 import { Github } from "@styled-icons/boxicons-logos/Github"
 import { LinkedinSquare } from "@styled-icons/boxicons-logos/LinkedinSquare"
 
-import EditProfileModal from "../components/Profile/EditProfileModal"
-
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -25,26 +23,6 @@ const Content = styled.div`
   background-color: #2e428f;
   padding: 30px;
   border-radius: 25px;
-`
-
-const Project = styled.div`
-  border-radius: 10px;
-  background-color: #5478bf;
-  padding: 10px 10px;
-  margin: 10px 0;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-
-const ProjectTitle = styled.h4`
-  margin: 0;
-  font-style: italic;
-`
-
-const ProjectContent = styled.p`
-  margin: 0;
 `
 
 const ContentHeading = styled.div`
@@ -107,10 +85,6 @@ const Name = styled.h1`
   margin: 0;
 `
 
-const Description = styled.p`
-  margin-bottom: 0;
-`
-
 const Roles = styled.div`
   display: flex;
   flex-direction: row;
@@ -130,11 +104,11 @@ const Role = styled.div`
 const LinkBar = styled.div`
   display: flex;
   flex-direction: row;
-
+  align-items: center;
+  flex-wrap: wrap;
   & > * {
     margin: 5px;
   }
-  height: 80px;
 `
 
 const ToolTipText = styled.span`
@@ -190,6 +164,13 @@ const EditButton = styled.div`
   }
 `
 
+const Edit = styled.input.attrs(props => ({
+  type: "text",
+}))`
+  height: 30px;
+  width: 100px;
+`
+
 export default function Profile() {
   const account = {
     id: "test_id",
@@ -204,13 +185,6 @@ export default function Profile() {
     mRoboChip: 3,
     eRoboChip: 20,
     sRoboChip: 56,
-    description:
-      "My name is Eduardo, a third year Electrical Engineering student and the President of UCSB’s Robotics Club. I aim to help improve the club and help members benefit from their experience as much as possible while in the club. My main passions are engineering and powerlifting! ",
-    projects: [
-      { title: "Project 1", desc: "Lead" },
-      { title: "Project 2", desc: "Did stuff" },
-      { title: "Project 3", desc: "Not sure" },
-    ],
   }
 
   const [shake, setShake] = useState(false)
@@ -227,23 +201,50 @@ export default function Profile() {
 
   const [editOpen, setEditOpen] = useState(false)
 
+  const [formValues, setFormValues] = useState({
+    firstName: account.firstName,
+    lastName: account.lastName,
+    github: account.github,
+    linkedIn: account.linkedIn,
+    email: account.email,
+  })
+
+  const changeFormValue = newVal => setFormValues({ ...formValues, ...newVal })
+
   return (
     <Page>
       <PageContainer>
-        {editOpen ? (
-          <EditProfileModal
-            isOpen={editOpen}
-            closeModal={() => setEditOpen(false)}
-          />
-        ) : (
-          <></>
-        )}
         <Content>
           <ContentHeading>
             <div>
               <NameContainer>
-                <Name>{account.firstName + " " + account.lastName}</Name>
-                {account.emailVerified === false ? (
+                {editOpen ? (
+                  <>
+                    <Edit
+                      name="firstName"
+                      defaultValue={formValues.firstName}
+                      onChange={newVal =>
+                        changeFormValue({
+                          firstName: newVal.currentTarget.value,
+                        })
+                      }
+                    />
+                    <Edit
+                      name="lastName"
+                      defaultValue={formValues.lastName}
+                      onChange={newVal =>
+                        changeFormValue({
+                          lastName: newVal.currentTarget.value,
+                        })
+                      }
+                    />
+                  </>
+                ) : (
+                  <Name>
+                    {formValues.firstName + " " + formValues.lastName}
+                  </Name>
+                )}
+                {formValues.emailVerified === false ? (
                   <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
                 ) : null}
               </NameContainer>
@@ -290,44 +291,62 @@ export default function Profile() {
               ) : null}
             </Options>
           </ContentHeading>
-          {account.description ? (
-            <Description>{account.description}</Description>
-          ) : null}
           <LinkBar>
-            {account.github ? (
-              <a href={`https://www.github.com/${account.github}`}>
+            {formValues.github || editOpen ? (
+              <a href={`https://www.github.com/${formValues.github}`}>
                 <Github size="40px" />
               </a>
             ) : null}
-            {account.linkedIn ? (
-              <a href={`https://www.linkedin.com/in/${account.linkedIn}`}>
+            {editOpen ? (
+              <Edit
+                name="github"
+                defaultValue={formValues.github}
+                onChange={newVal =>
+                  changeFormValue({
+                    github: newVal.currentTarget.value,
+                  })
+                }
+              />
+            ) : null}
+
+            {formValues.linkedIn || editOpen ? (
+              <a href={`https://www.linkedin.com/in/${formValues.linkedIn}`}>
                 <LinkedinSquare size="40px" />
               </a>
             ) : null}
+            {editOpen ? (
+              <Edit
+                defaultValue={formValues.linkedIn}
+                onChange={newVal =>
+                  changeFormValue({
+                    linkedIn: newVal.currentTarget.value,
+                  })
+                }
+              />
+            ) : null}
             {
               // AND WITH emailDisabled? OPTION
-              account.email && false ? (
-                <a href={`mailto:${account.email}`}>
+              formValues.email || editOpen ? (
+                <a href={`mailto:${formValues.email}`}>
                   <Email size="40px" />
                 </a>
               ) : null
             }
+            {editOpen ? (
+              <Edit
+                defaultValue={formValues.email}
+                onChange={newVal =>
+                  changeFormValue({
+                    email: newVal.currentTarget.value,
+                  })
+                }
+              />
+            ) : null}
           </LinkBar>
-          {account.projects.length > 0
-            ? account.projects.map(proj => {
-                return (
-                  <Project>
-                    <ProjectTitle>{proj.title}</ProjectTitle>
-                    &nbsp;-&nbsp;
-                    <ProjectContent>{proj.desc}</ProjectContent>
-                  </Project>
-                )
-              })
-            : null}
           <EditButton
             size="45"
             color="orange"
-            onClick={() => setEditOpen(true)}
+            onClick={() => setEditOpen(!editOpen)}
             style={{ cursor: "pointer" }}
           >
             Edit
