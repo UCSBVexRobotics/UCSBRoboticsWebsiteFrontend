@@ -11,7 +11,7 @@ import EditProfileModal from "../components/Profile/EditProfileModal"
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-red;
+  // background-color: red;
   width: 100%;
   height: 100%;
   color: white;
@@ -25,7 +25,7 @@ const Content = styled.div`
   background-color: #2e428f;
   padding: 30px;
   border-radius: 25px;
-`
+  `
 
 const Project = styled.div`
   border-radius: 10px;
@@ -51,7 +51,7 @@ const ContentHeading = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
   flex-wrap: wrap;
 `
@@ -64,16 +64,15 @@ const Options = styled.div`
   flex-grow: 1;
 `
 
-const VerifyEmail = styled.div`
-  width: 105px;
-  height: 30px;
-  background-color: red;
-  border-radius: 10px;
+const NameContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 0 10px;
-  font-weight: bold;
+  `
+
+const VerifyEmail = styled.h4`
+  color: red;
+  margin: 0;
+  margin-left: 15px;
 
   animation: ${({ shake }) => (shake ? "shake" : "")} 1.5s
     cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
@@ -162,6 +161,8 @@ const Tooltip = styled.div`
 const Circle = styled.div`
   height: ${({ size }) => size}px;
   width: ${({ size }) => size}px;
+  padding: 2px;
+  margin: 0 5px;
   background-color: ${({ color }) => color};
   border-radius: 50%;
 
@@ -170,6 +171,23 @@ const Circle = styled.div`
   align-items: center;
 
   font-weight: bold;
+`
+
+const EditButton = styled.div`
+  padding: 10px 30px;
+  color: white;
+  font-size: 20px;
+  background-color: #ed765a;
+  border-radius: 7px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background-color: transparent;
+    color: #ed765a;
+    border: 1px solid #ed765a;
+  }
 `
 
 export default function Profile() {
@@ -185,7 +203,7 @@ export default function Profile() {
     linkedIn: "testLink",
     mRoboChip: 3,
     eRoboChip: 20,
-    sRoboChip: 1000,
+    sRoboChip: 56,
     description:
       "My name is Eduardo, a third year Electrical Engineering student and the President of UCSB’s Robotics Club. I aim to help improve the club and help members benefit from their experience as much as possible while in the club. My main passions are engineering and powerlifting! ",
     projects: [
@@ -218,12 +236,17 @@ export default function Profile() {
             closeModal={() => setEditOpen(false)}
           />
         ) : (
-          <></>
-        )}
+            <></>
+          )}
         <Content>
           <ContentHeading>
             <div>
-              <Name>{account.firstName + " " + account.lastName}</Name>
+              <NameContainer>
+                <Name>{account.firstName + " " + account.lastName}</Name>
+                {account.emailVerified === false ? (
+                  <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
+                ) : null}
+              </NameContainer>
               <Roles>
                 {account.role === "admin" ? <Role>Admin</Role> : null}
                 {
@@ -235,23 +258,47 @@ export default function Profile() {
               </Roles>
             </div>
             <Options>
-              {account.emailVerified === false ? (
-                <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
+              {account.mRoboChip ? (
+                <Tooltip>
+                  <Circle size="40" color="#24e07c">
+                    {account.mRoboChip}
+                  </Circle>
+                  <ToolTipText color="#24e07c">
+                    Mechanical Team RoboChips
+                </ToolTipText>
+                </Tooltip>
               ) : null}
-              <Circle
-                size="45"
-                color="orange"
-                onClick={() => setEditOpen(true)}
-                style={{ cursor: "pointer" }}
-              >
-                Edit
-              </Circle>
+              {account.eRoboChip ? (
+                <Tooltip>
+                  <Circle size="40" color="#fac739">
+                    {account.eRoboChip}
+                  </Circle>
+                  <ToolTipText color="#fac739">
+                    Electrical Team RoboChips
+                </ToolTipText>
+                </Tooltip>
+              ) : null}
+              {account.sRoboChip ? (
+                <Tooltip>
+                  <Circle size="40" color="#2d6ae3">
+                    {account.sRoboChip}
+                  </Circle>
+                  <ToolTipText color="#2d6ae3">
+                    Software Team RoboChips
+                </ToolTipText>
+                </Tooltip>
+              ) : null}
             </Options>
           </ContentHeading>
           {account.description ? (
             <Description>{account.description}</Description>
           ) : null}
           <LinkBar>
+            {account.github ? (
+              <a href={`https://www.github.com/${account.github}`}>
+                <Github size="40px" />
+              </a>
+            ) : null}
             {account.linkedIn ? (
               <a href={`https://www.linkedin.com/in/${account.linkedIn}`}>
                 <LinkedinSquare size="40px" />
@@ -265,53 +312,26 @@ export default function Profile() {
                 </a>
               ) : null
             }
-            {account.github ? (
-              <a href={`https://www.github.com/${account.github}`}>
-                <Github size="40px" />
-              </a>
-            ) : null}
-            {account.mRoboChip ? (
-              <Tooltip>
-                <Circle size="40" color="#24e07c">
-                  {account.mRoboChip}
-                </Circle>
-                <ToolTipText color="#24e07c">
-                  Mechanical Team RoboChips
-                </ToolTipText>
-              </Tooltip>
-            ) : null}
-            {account.eRoboChip ? (
-              <Tooltip>
-                <Circle size="40" color="#fac739">
-                  {account.eRoboChip}
-                </Circle>
-                <ToolTipText color="#fac739">
-                  Electronical Team RoboChips
-                </ToolTipText>
-              </Tooltip>
-            ) : null}
-            {account.sRoboChip ? (
-              <Tooltip>
-                <Circle size="40" color="#2d6ae3">
-                  {account.sRoboChip}
-                </Circle>
-                <ToolTipText color="#2d6ae3">
-                  Software Team RoboChips
-                </ToolTipText>
-              </Tooltip>
-            ) : null}
           </LinkBar>
           {account.projects.length > 0
             ? account.projects.map(proj => {
-                return (
-                  <Project>
-                    <ProjectTitle>{proj.title}</ProjectTitle>
+              return (
+                <Project>
+                  <ProjectTitle>{proj.title}</ProjectTitle>
                     &nbsp;-&nbsp;
-                    <ProjectContent>{proj.desc}</ProjectContent>
-                  </Project>
-                )
-              })
+                  <ProjectContent>{proj.desc}</ProjectContent>
+                </Project>
+              )
+            })
             : null}
+          <EditButton
+            size="45"
+            color="orange"
+            onClick={() => setEditOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            Edit
+              </EditButton>
         </Content>
       </PageContainer>
     </Page>
