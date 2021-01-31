@@ -25,7 +25,7 @@ const Content = styled.div`
   background-color: #2e428f;
   padding: 30px;
   border-radius: 25px;
-  `
+`
 
 const Project = styled.div`
   border-radius: 10px;
@@ -67,7 +67,7 @@ const Options = styled.div`
 const NameContainer = styled.div`
   display: flex;
   align-items: center;
-  `
+`
 
 const VerifyEmail = styled.h4`
   color: red;
@@ -177,6 +177,7 @@ const EditButton = styled.div`
   padding: 10px 30px;
   color: white;
   font-size: 20px;
+  border: 1px solid #ed765a;
   background-color: #ed765a;
   border-radius: 7px;
   outline: none;
@@ -186,7 +187,6 @@ const EditButton = styled.div`
   &:hover {
     background-color: transparent;
     color: #ed765a;
-    border: 1px solid #ed765a;
   }
 `
 
@@ -236,8 +236,8 @@ export default function Profile() {
             closeModal={() => setEditOpen(false)}
           />
         ) : (
-            <></>
-          )}
+          <></>
+        )}
         <Content>
           <ContentHeading>
             <div>
@@ -265,7 +265,7 @@ export default function Profile() {
                   </Circle>
                   <ToolTipText color="#24e07c">
                     Mechanical Team RoboChips
-                </ToolTipText>
+                  </ToolTipText>
                 </Tooltip>
               ) : null}
               {account.eRoboChip ? (
@@ -275,7 +275,7 @@ export default function Profile() {
                   </Circle>
                   <ToolTipText color="#fac739">
                     Electrical Team RoboChips
-                </ToolTipText>
+                  </ToolTipText>
                 </Tooltip>
               ) : null}
               {account.sRoboChip ? (
@@ -285,7 +285,7 @@ export default function Profile() {
                   </Circle>
                   <ToolTipText color="#2d6ae3">
                     Software Team RoboChips
-                </ToolTipText>
+                  </ToolTipText>
                 </Tooltip>
               ) : null}
             </Options>
@@ -315,14 +315,14 @@ export default function Profile() {
           </LinkBar>
           {account.projects.length > 0
             ? account.projects.map(proj => {
-              return (
-                <Project>
-                  <ProjectTitle>{proj.title}</ProjectTitle>
+                return (
+                  <Project>
+                    <ProjectTitle>{proj.title}</ProjectTitle>
                     &nbsp;-&nbsp;
-                  <ProjectContent>{proj.desc}</ProjectContent>
-                </Project>
-              )
-            })
+                    <ProjectContent>{proj.desc}</ProjectContent>
+                  </Project>
+                )
+              })
             : null}
           <EditButton
             size="45"
@@ -331,7 +331,7 @@ export default function Profile() {
             style={{ cursor: "pointer" }}
           >
             Edit
-              </EditButton>
+          </EditButton>
         </Content>
       </PageContainer>
     </Page>
