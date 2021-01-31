@@ -52,10 +52,25 @@ export default function LoginModal(props) {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
+          // navigate("/Profile")
+          fetch(
+            "https://roboticswebsite.azurewebsites.net/api/Login/authenticate",
+            {
+              method: "POST",
+              body: JSON.stringify({ id: "user99", password: "string" }),
+              headers: {
+                accept: "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "content-type": "application/json; charset=utf-8",
+                "Access-Control-Allow-Origin": "*",
+              },
+            }
+          )
+            .then(response => {
+              console.log(response)
+            })
+            .catch(error => alert(error))
+          setSubmitting(false)
         }}
       >
         {({
