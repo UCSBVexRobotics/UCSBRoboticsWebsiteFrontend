@@ -30,7 +30,6 @@ const ContentHeading = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-
   flex-wrap: wrap;
 `
 
@@ -44,7 +43,9 @@ const Options = styled.div`
 
 const NameContainer = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 `
 
 const VerifyEmail = styled.h4`
@@ -81,6 +82,12 @@ const VerifyEmail = styled.h4`
   }
 `
 
+const Names = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`
+
 const Name = styled.h1`
   margin: 0;
 `
@@ -106,9 +113,6 @@ const LinkBar = styled.div`
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  & > * {
-    margin: 5px;
-  }
 `
 
 const ToolTipText = styled.span`
@@ -147,8 +151,19 @@ const Circle = styled.div`
   font-weight: bold;
 `
 
+const ButtonArea = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+`
+
 const EditButton = styled.div`
   padding: 10px 30px;
+  margin: 5px 10px;
+  width: 100%;
   color: white;
   font-size: 20px;
   border: 1px solid #ed765a;
@@ -168,7 +183,22 @@ const Edit = styled.input.attrs(props => ({
   type: "text",
 }))`
   height: 30px;
-  width: 100px;
+  width: 100%;
+
+  border-radius: 7px;
+  border: 0;
+  margin: 3px;
+
+  font-size: 20px;
+`
+
+const EditableArea = styled.div`
+  display: flex;
+  align-items: center;
+  & > * {
+    margin: 5px;
+  }
+  ${({ editing }) => (editing ? "width: 100%" : null)};
 `
 
 export default function Profile() {
@@ -201,13 +231,7 @@ export default function Profile() {
 
   const [editOpen, setEditOpen] = useState(false)
 
-  const [formValues, setFormValues] = useState({
-    firstName: account.firstName,
-    lastName: account.lastName,
-    github: account.github,
-    linkedIn: account.linkedIn,
-    email: account.email,
-  })
+  const [formValues, setFormValues] = useState(account)
 
   const changeFormValue = newVal => setFormValues({ ...formValues, ...newVal })
 
@@ -219,7 +243,7 @@ export default function Profile() {
             <div>
               <NameContainer>
                 {editOpen ? (
-                  <>
+                  <Names>
                     <Edit
                       name="firstName"
                       defaultValue={formValues.firstName}
@@ -238,13 +262,13 @@ export default function Profile() {
                         })
                       }
                     />
-                  </>
+                  </Names>
                 ) : (
                   <Name>
                     {formValues.firstName + " " + formValues.lastName}
                   </Name>
                 )}
-                {formValues.emailVerified === false ? (
+                {formValues.emailVerified === false && editOpen === false ? (
                   <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
                 ) : null}
               </NameContainer>
@@ -292,65 +316,96 @@ export default function Profile() {
             </Options>
           </ContentHeading>
           <LinkBar>
-            {formValues.github || editOpen ? (
-              <a href={`https://www.github.com/${formValues.github}`}>
-                <Github size="40px" />
-              </a>
-            ) : null}
-            {editOpen ? (
-              <Edit
-                name="github"
-                defaultValue={formValues.github}
-                onChange={newVal =>
-                  changeFormValue({
-                    github: newVal.currentTarget.value,
-                  })
-                }
-              />
-            ) : null}
-
-            {formValues.linkedIn || editOpen ? (
-              <a href={`https://www.linkedin.com/in/${formValues.linkedIn}`}>
-                <LinkedinSquare size="40px" />
-              </a>
-            ) : null}
-            {editOpen ? (
-              <Edit
-                defaultValue={formValues.linkedIn}
-                onChange={newVal =>
-                  changeFormValue({
-                    linkedIn: newVal.currentTarget.value,
-                  })
-                }
-              />
-            ) : null}
-            {
-              // AND WITH emailDisabled? OPTION
-              formValues.email || editOpen ? (
-                <a href={`mailto:${formValues.email}`}>
-                  <Email size="40px" />
+            <EditableArea editing={editOpen}>
+              {formValues.github || editOpen ? (
+                <a href={`https://www.github.com/${formValues.github}`}>
+                  <Github size="40px" />
                 </a>
-              ) : null
-            }
-            {editOpen ? (
-              <Edit
-                defaultValue={formValues.email}
-                onChange={newVal =>
-                  changeFormValue({
-                    email: newVal.currentTarget.value,
-                  })
-                }
-              />
-            ) : null}
+              ) : null}
+              {editOpen ? (
+                <Edit
+                  name="github"
+                  defaultValue={formValues.github}
+                  onChange={newVal =>
+                    changeFormValue({
+                      github: newVal.currentTarget.value,
+                    })
+                  }
+                />
+              ) : null}
+            </EditableArea>
+            <EditableArea editing={editOpen}>
+              {formValues.linkedIn || editOpen ? (
+                <a href={`https://www.linkedin.com/in/${formValues.linkedIn}`}>
+                  <LinkedinSquare size="40px" />
+                </a>
+              ) : null}
+              {editOpen ? (
+                <Edit
+                  defaultValue={formValues.linkedIn}
+                  onChange={newVal =>
+                    changeFormValue({
+                      linkedIn: newVal.currentTarget.value,
+                    })
+                  }
+                />
+              ) : null}
+            </EditableArea>
+            <EditableArea editing={editOpen}>
+              {
+                // AND WITH emailDisabled? OPTION
+                formValues.email || editOpen ? (
+                  <a href={`mailto:${formValues.email}`}>
+                    <Email size="40px" />
+                  </a>
+                ) : null
+              }
+              {editOpen ? (
+                <Edit
+                  defaultValue={formValues.email}
+                  onChange={newVal =>
+                    changeFormValue({
+                      email: newVal.currentTarget.value,
+                    })
+                  }
+                />
+              ) : null}
+            </EditableArea>
           </LinkBar>
-          <EditButton
-            size="45"
-            color="orange"
-            onClick={() => setEditOpen(!editOpen)}
-            style={{ cursor: "pointer" }}
-          >
-            Edit
-          </EditButton>
+          <ButtonArea>
+            {editOpen ? (
+              <EditButton
+                size="45"
+                color="orange"
+                onClick={() => {
+                  if (editOpen) {
+                    /* 
+                    
+                    PUSH formValues to API
+                      > UPDATE ACCOUNT
+                    */
+                  }
+                  setEditOpen(!editOpen)
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                Save
+              </EditButton>
+            ) : null}
+            <EditButton
+              size="45"
+              color="orange"
+              onClick={() => {
+                if (editOpen) {
+                  setFormValues(account)
+                }
+                setEditOpen(!editOpen)
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {editOpen ? "Reset" : "Edit"}
+            </EditButton>
+          </ButtonArea>
         </Content>
       </PageContainer>
     </Page>
