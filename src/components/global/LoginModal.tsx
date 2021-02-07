@@ -52,21 +52,21 @@ export default function LoginModal(props) {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
-          // navigate("/Profile")
-          fetch(
-            "https://roboticswebsite.azurewebsites.net/api/Login/authenticate",
-            {
-              method: "POST",
-              body: JSON.stringify({ id: "user99", password: "string" }),
-              headers: {
-                accept: "*/*",
-                "accept-encoding": "gzip, deflate, br",
-                "content-type": "application/json; charset=utf-8",
-                "Access-Control-Allow-Origin": "*",
-              },
-            }
-          )
+          let proxyUrl = "https://mighty-fjord-27980.herokuapp.com/",
+            targetUrl =
+              "http://roboticswebsite.azurewebsites.net/api/Login/authenticate"
+          fetch(proxyUrl + targetUrl, {
+            method: "POST",
+            body: JSON.stringify({ id: "user99", password: "string" }),
+            headers: {
+              mode: "no-cors",
+              accept: "*/*",
+              "accept-encoding": "gzip, deflate, br",
+              "content-type": "application/json; charset=utf-8",
+            },
+          })
             .then(response => {
+              alert(response)
               console.log(response)
             })
             .catch(error => alert(error))
