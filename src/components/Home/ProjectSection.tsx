@@ -1,5 +1,5 @@
 import React from "react"
-import HomeContainer from "../global/HomeContainer"
+import HomeContainer from "./HomeContainer"
 import ProjectCircle from "./ProjectCircle"
 import styled from "styled-components"
 

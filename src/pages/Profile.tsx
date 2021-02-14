@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react"
-import Page from "../components/Page"
+import Page from "../components/global/Page"
 import styled from "styled-components"
+
+import Button from "../components/global/Button"
+import ToolTip from "../components/global/Shapes/ToolTip"
+import Circle from "../components/global/Shapes/Circle"
+import Shake from "../components/global/Shapes/Shake"
 
 import { Email } from "@styled-icons/material/Email"
 import { Github } from "@styled-icons/boxicons-logos/Github"
 import { LinkedinSquare } from "@styled-icons/boxicons-logos/LinkedinSquare"
 import { Delete } from "@styled-icons/feather/Delete"
+
+import Colors from "../styles/colors"
 
 const PageContainer = styled.div`
   display: flex;
@@ -14,9 +21,6 @@ const PageContainer = styled.div`
   width: 100%;
   height: 100%;
   color: white;
-
-  // just to prevent nav bar overlap
-  padding-top: 80px;
 `
 
 const Content = styled.div`
@@ -50,37 +54,9 @@ const NameContainer = styled.div`
 `
 
 const VerifyEmail = styled.h4`
-  color: red;
+  color: ${Colors.RED};
   margin: 0;
   margin-left: 15px;
-
-  animation: ${({ shake }) => (shake ? "shake" : "")} 1.5s
-    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-
-  @keyframes shake {
-    10%,
-    90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-
-    20%,
-    80% {
-      transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-      transform: translate3d(4px, 0, 0);
-    }
-  }
 `
 
 const Names = styled.div`
@@ -111,50 +87,18 @@ const Role = styled.div`
   display: flex;
   item-align: center;
   justify-content: center;
-  background-color: #ed765a;
+  background-color: ${Colors.ORANGE};
 `
 
-const LinkBar = styled.div`
+const LinkBar = styled.div<{ editOpen: boolean }>`
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-`
 
-const ToolTipText = styled.span`
-  visibility: hidden;
-  background-color: ${({ color }) => color};
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  margin: 5px 0;
-  position: absolute;
-  z-index: 1;
-`
-
-const Tooltip = styled.div`
-  visibility: show;
-
-  &:hover {
-    ${ToolTipText} {
-      visibility: visible;
-    }
-  }
-`
-
-const Circle = styled.div`
-  height: ${({ size }) => size}px;
-  width: ${({ size }) => size}px;
-  padding: 2px;
-  margin: 0 5px;
-  background-color: ${({ color }) => color};
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: bold;
+  border-radius: 10px;
+  ${({ editOpen }) => (editOpen ? "background-color: #5478bf;" : "")}
 `
 
 const ButtonArea = styled.div`
@@ -163,25 +107,6 @@ const ButtonArea = styled.div`
   width: 100%;
   @media (max-width: 580px) {
     flex-wrap: wrap;
-  }
-`
-
-const EditButton = styled.div`
-  padding: 10px 30px;
-  margin: 5px ${({ open }) => (open ? "10px" : "0")};
-  width: 100%;
-  color: white;
-  font-size: 20px;
-  border: 1px solid #ed765a;
-  background-color: #ed765a;
-  border-radius: 7px;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-
-  &:hover {
-    background-color: transparent;
-    color: #ed765a;
   }
 `
 
@@ -208,7 +133,7 @@ overflow: auto;
 `
 */
 
-const EditableArea = styled.div`
+const EditableArea = styled.div<{ editing: boolean }>`
   display: flex;
   align-items: center;
   & > * {
@@ -217,7 +142,7 @@ const EditableArea = styled.div`
   ${({ editing }) => (editing ? "width: 100%" : null)};
 `
 
-const ContentUser = styled.div`
+const ContentUser = styled.div<{ open: boolean }>`
   width: ${({ open }) => (open ? "100%" : "auto")};
 `
 const Project = styled.div`
@@ -284,18 +209,6 @@ export default function Profile() {
     ],
   }
 
-  const [shake, setShake] = useState(false)
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setShake(!shake)
-    }, 2500)
-
-    return () => {
-      clearInterval(timer)
-    }
-  }, [shake])
-
   const [editOpen, setEditOpen] = useState(false)
 
   const [formValues, setFormValues] = useState(account)
@@ -342,7 +255,9 @@ export default function Profile() {
                   </Name>
                 )}
                 {formValues.emailVerified === false && editOpen === false ? (
-                  <VerifyEmail shake={shake}>Verify Email</VerifyEmail>
+                  <Shake time="2500">
+                    <VerifyEmail>Verify Email</VerifyEmail>
+                  </Shake>
                 ) : null}
               </NameContainer>
               {!editOpen ? (
@@ -360,39 +275,36 @@ export default function Profile() {
             {!editOpen ? (
               <Options>
                 {account.mRoboChip ? (
-                  <Tooltip>
-                    <Circle size="40" color="#24e07c">
-                      {account.mRoboChip}
-                    </Circle>
-                    <ToolTipText color="#24e07c">
-                      Mechanical Team RoboChips
-                    </ToolTipText>
-                  </Tooltip>
+                  <ToolTip color="#24e07c" text="Mechanical Team RoboChips">
+                    <Circle
+                      size="40px"
+                      color="#24e07c"
+                      text={account.mRoboChip}
+                    />
+                  </ToolTip>
                 ) : null}
                 {account.eRoboChip ? (
-                  <Tooltip>
-                    <Circle size="40" color="#fac739">
-                      {account.eRoboChip}
-                    </Circle>
-                    <ToolTipText color="#fac739">
-                      Electrical Team RoboChips
-                    </ToolTipText>
-                  </Tooltip>
+                  <ToolTip color="#fac739" text="Electrical Team RoboChips">
+                    <Circle
+                      size="40px"
+                      color="#fac739"
+                      text={account.eRoboChip}
+                    />
+                  </ToolTip>
                 ) : null}
                 {account.sRoboChip ? (
-                  <Tooltip>
-                    <Circle size="40" color="#2d6ae3">
-                      {account.sRoboChip}
-                    </Circle>
-                    <ToolTipText color="#2d6ae3">
-                      Software Team RoboChips
-                    </ToolTipText>
-                  </Tooltip>
+                  <ToolTip color="#2d6ae3" text="Software Team RoboChips">
+                    <Circle
+                      size="40px"
+                      color="#2d6ae3"
+                      text={account.sRoboChip}
+                    />
+                  </ToolTip>
                 ) : null}
               </Options>
             ) : null}
           </ContentHeading>
-          <LinkBar>
+          <LinkBar editOpen={editOpen}>
             <EditableArea editing={editOpen}>
               {formValues.github || editOpen ? (
                 <a href={`https://www.github.com/${formValues.github}`}>
@@ -498,39 +410,35 @@ export default function Profile() {
             : null}
           <ButtonArea>
             {editOpen ? (
-              <EditButton
-                open={editOpen}
-                size="45"
-                color="orange"
+              <Button
+                width="100%"
                 onClick={() => {
                   if (editOpen) {
                     /* 
-                    
-                    PUSH formValues to API
-                      > UPDATE ACCOUNT
-                    */
+                  
+                  PUSH formValues to API
+                    > UPDATE ACCOUNT
+                  */
                   }
                   setEditOpen(!editOpen)
                 }}
-                style={{ cursor: "pointer" }}
-              >
-                Save
-              </EditButton>
+                text="Save"
+                primaryColor={Colors.ORANGE}
+                secondaryColor="white"
+              />
             ) : null}
-            <EditButton
-              open={editOpen}
-              size="45"
-              color="orange"
+            <Button
+              width="100%"
               onClick={() => {
                 if (editOpen) {
                   setFormValues(account)
                 }
                 setEditOpen(!editOpen)
               }}
-              style={{ cursor: "pointer" }}
-            >
-              {editOpen ? "Reset" : "Edit"}
-            </EditButton>
+              text={editOpen ? "Reset" : "Edit"}
+              primaryColor={Colors.ORANGE}
+              secondaryColor="white"
+            />
           </ButtonArea>
         </Content>
       </PageContainer>

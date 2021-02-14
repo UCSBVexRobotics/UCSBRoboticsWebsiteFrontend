@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import LogoCircle from "../../static/logoCircle.png"
+import LogoCircle from "../../../../static/logoCircle.png"
 import { FacebookSquare } from "@styled-icons/boxicons-logos/FacebookSquare"
 import { Email } from "@styled-icons/material/Email"
 import { Link } from "gatsby"

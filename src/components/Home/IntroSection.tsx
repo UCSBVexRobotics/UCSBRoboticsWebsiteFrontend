@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import HomeContainer from "../global/HomeContainer"
+import HomeContainer from "./HomeContainer"
 import styled from "styled-components"
-import LogoCircle from "../../../static/logoCircle.png"
 import FlipBox from "../Home/FlipBox"
 
-import carImage from "../../../static/car.svg";
+import LogoCircle from "../../../static/logoCircle.png"
+import carImage from "../../../static/car.svg"
 
 const HeaderWrapper = styled.div`
   display: flex;

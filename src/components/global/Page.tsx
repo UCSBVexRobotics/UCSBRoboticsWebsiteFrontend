@@ -1,8 +1,8 @@
 import React from "react"
-import Footer from "../components/Footer"
-import NavBar from "../components/NavBar"
+import Footer from "./Navigation/Footer"
+import NavBar from "./Navigation/NavBar"
 import styled from "styled-components"
-import GlobalStyle from "../styles/globalStyles"
+import GlobalStyle from "../../styles/globalStyles"
 
 const BackgroundContainer = styled.div`
   background-image: linear-gradient(#3dd6ff, #003384);

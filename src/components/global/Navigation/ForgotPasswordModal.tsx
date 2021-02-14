@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
-import { Formik, ErrorMessage } from "formik"
-import Form from "./FormComponents/Form"
-import FormField from "./FormComponents/FormField"
-import FormPassword from "./FormComponents/FormPassword"
-import SubmitButton from "./FormComponents/SubmitButton"
+import { Formik } from "formik"
+import Form from "../FormComponents/Form"
+import FormField from "../FormComponents/FormField"
+import SubmitButton from "../FormComponents/SubmitButton"
 import Modal from "./Modal"
 import { UserValuesContext } from "./UserValuesContext"
 
@@ -25,12 +24,19 @@ const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid Email").required("Required"),
 })
 
+type Props = {
+  isOpen: boolean
+  openLoginModal: () => void
+  openSignupModal: () => void
+  closeModal: () => void
+}
+
 export default function ForgotPasswordModal({
   isOpen,
   openLoginModal,
   openSignupModal,
   closeModal,
-}) {
+}: Props) {
   const [userValues, updateUserValues] = useContext(UserValuesContext)
 
   return (
@@ -57,20 +63,20 @@ export default function ForgotPasswordModal({
             <Form handleSubmit={handleSubmit}>
               <FormField
                 name="email"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.email}
                 touched={touched.email}
                 error={errors.email}
               />
               <SubmitButton name="Send Verification" disabled={isSubmitting} />
               <CreateAccountLink>
-                Remember Password? Click{" "}
-                <a onClick={() => openLoginModal()}>here</a> to sign in!
+                Remember Password? Click <a onClick={openLoginModal}>here</a> to
+                sign in!
               </CreateAccountLink>
               <CreateAccountLink>
                 Don't have an account? Click{" "}
-                <a onClick={() => openSignupModal()}>here</a> to sign up!
+                <a onClick={openSignupModal}>here</a> to sign up!
               </CreateAccountLink>
             </Form>
           )

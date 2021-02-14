@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
-import Form from "./FormComponents/Form"
-import FormField from "./FormComponents/FormField"
-import FormPassword from "./FormComponents/FormPassword"
-import SubmitButton from "./FormComponents/SubmitButton"
+import Form from "../FormComponents/Form"
+import FormField from "../FormComponents/FormField"
+import FormPassword from "../FormComponents/FormPassword"
+import SubmitButton from "../FormComponents/SubmitButton"
 import Modal from "./Modal"
 import { UserValuesContext } from "./UserValuesContext"
 import * as Yup from "yup"
@@ -24,12 +24,19 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
 })
 
+type Props = {
+  isOpen: boolean
+  openForgotPasswordModal: () => void
+  openSignupModal: () => void
+  closeModal: () => void
+}
+
 export default function LoginModal({
   isOpen,
   openSignupModal,
   openForgotPasswordModal,
   closeModal,
-}) {
+}: Props) {
   const [userValues, updateUserValues] = useContext(UserValuesContext)
 
   return (
@@ -62,16 +69,16 @@ export default function LoginModal({
             <Form handleSubmit={handleSubmit}>
               <FormField
                 name="email"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.email}
                 touched={touched.email}
                 error={errors.email}
               />
               <FormPassword
                 name="password"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.password}
                 touched={touched.password}
                 error={errors.password}

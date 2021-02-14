@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
-import { Field } from "formik"
+import { Field, FormikTouched, FormikErrors } from "formik"
 import { EyeFill } from "@styled-icons/bootstrap/EyeFill"
 
 const FormFieldWrapper = styled.div`
@@ -39,24 +39,42 @@ const ErrorMsg = styled.p`
   padding: 0;
 `
 
-export default function FormPassword(props) {
+type Props = {
+  name: string
+  value: string
+  id?: string
+  touched: boolean | FormikTouched<any> | FormikTouched<any>[]
+  error: string | string[] | FormikErrors<any> | FormikErrors<any>[]
+  onChange: (s: string) => void
+  onBlur: (s: string) => void
+}
+
+export default function FormPassword({
+  name,
+  value,
+  id = name,
+  touched,
+  error,
+  onChange,
+  onBlur,
+}: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
     <FormFieldWrapper>
-      <StyledLabel htmlFor={props.name}>{props.name}</StyledLabel>
+      <StyledLabel htmlFor={name}>{name}</StyledLabel>
       <InputWrapper>
         <Field
           type={showPassword ? "text" : "password"}
           component={StyledField}
-          name={props.name}
-          value={props.value}
-          onChange={props.onChange(props.id ? props.id : props.name)}
-          onBlur={props.onBlur(props.id ? props.id : props.name)}
+          name={name}
+          value={value}
+          onChange={onChange(id)}
+          onBlur={onBlur(id)}
         />
         <EyeFill height="20px" onClick={() => setShowPassword(!showPassword)} />
       </InputWrapper>
-      <ErrorMsg>{props.error && props.touched ? props.error : null}</ErrorMsg>
+      <ErrorMsg>{error && touched ? error : null}</ErrorMsg>
     </FormFieldWrapper>
   )
 }

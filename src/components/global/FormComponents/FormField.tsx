@@ -1,6 +1,6 @@
-import React, { Fragment } from "react"
+import React from "react"
 import styled from "styled-components"
-import { Field } from "formik"
+import { Field, FormikTouched, FormikErrors } from "formik"
 
 const FormFieldWrapper = styled.div`
   margin: 3%;
@@ -33,19 +33,37 @@ const ErrorMsg = styled.p`
   padding: 0;
 `
 
-export default function FormField(props) {
+type Props = {
+  name: string
+  value: string
+  id?: string
+  touched: boolean | FormikTouched<any> | FormikTouched<any>[]
+  error: string | string[] | FormikErrors<any> | FormikErrors<any>[]
+  onChange: (s: string) => void
+  onBlur: (s: string) => void
+}
+
+export default function FormField({
+  name,
+  value,
+  id = name,
+  touched,
+  error,
+  onChange,
+  onBlur,
+}: Props) {
   return (
     <FormFieldWrapper>
-      <StyledLabel htmlFor={props.name}>{props.name}</StyledLabel>
+      <StyledLabel htmlFor={name}>{name}</StyledLabel>
       <Field
         type="text"
         component={StyledField}
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange(props.id ? props.id : props.name)}
-        onBlur={props.onBlur(props.id ? props.id : props.name)}
+        name={name}
+        value={value}
+        onChange={onChange(id)}
+        onBlur={onBlur(id)}
       />
-      <ErrorMsg>{props.error && props.touched ? props.error : null}</ErrorMsg>
+      <ErrorMsg>{error && touched ? error : null}</ErrorMsg>
     </FormFieldWrapper>
   )
 }

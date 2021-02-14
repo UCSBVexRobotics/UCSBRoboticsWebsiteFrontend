@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import HomeContainer from "../global/HomeContainer"
+import HomeContainer from "./HomeContainer"
 import styled from "styled-components"
 
 import background from "../../../static/background_transparent.svg"
@@ -44,11 +44,11 @@ const Img = styled.img`
   width: 300px;
 `
 
-const ImgBox = styled.div`
+const ImgBox = styled.div<{ flip: boolean }>`
   /*  &:hover {
     transform: rotateY(180deg);
   }*/
-  transform: rotateY(${props => (props.flip ? 180 : 0)}deg);
+  transform: rotateY(${({ flip }) => (flip ? 180 : 0)}deg);
 
   width: 300px;
   height: 250px;

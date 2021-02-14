@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
-import Form from "./FormComponents/Form"
-import FormField from "./FormComponents/FormField"
-import FormPassword from "./FormComponents/FormPassword"
-import SubmitButton from "./FormComponents/SubmitButton"
+import Form from "../FormComponents/Form"
+import FormField from "../FormComponents/FormField"
+import FormPassword from "../FormComponents/FormPassword"
+import SubmitButton from "../FormComponents/SubmitButton"
 import { UserValuesContext } from "./UserValuesContext"
 import Modal from "./Modal"
 
@@ -78,8 +78,8 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
               <FormField
                 name="First Name"
                 id="firstName"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.firstName}
                 error={errors.firstName}
                 touched={touched.firstName}
@@ -87,24 +87,24 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
               <FormField
                 name="Last Name"
                 id="lastName"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.lastName}
                 error={errors.lastName}
                 touched={touched.lastName}
               />
               <FormField
                 name="email"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.email}
                 error={errors.email}
                 touched={touched.email}
               />
               <FormPassword
                 name="password"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.password}
                 error={errors.password}
                 touched={touched.password}
@@ -112,8 +112,8 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
               <FormPassword
                 name="Verify Password"
                 id="verifyPassword"
-                onChange={e => handleChange(e)}
-                onBlur={e => handleBlur(e)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.verifyPassword}
                 error={errors.verifyPassword}
                 touched={touched.verifyPassword}

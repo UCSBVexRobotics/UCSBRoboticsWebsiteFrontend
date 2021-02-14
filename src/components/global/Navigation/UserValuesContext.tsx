@@ -2,7 +2,18 @@ import React, { useState, createContext } from "react"
 
 export const UserValuesContext = createContext(null)
 
-export const UserValues = props => {
+type UserValues = {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
+type Props = {
+  children: JSX.Element | JSX.Element[]
+}
+
+export const UserValues = ({ children }: Props) => {
   const [userValues, setUserValues] = useState({
     firstName: "",
     lastName: "",
@@ -10,13 +21,13 @@ export const UserValues = props => {
     password: "",
   })
 
-  const updateUserValues = newValues => {
+  const updateUserValues = (newValues: UserValues) => {
     setUserValues({ ...userValues, ...newValues })
   }
 
   return (
     <UserValuesContext.Provider value={[userValues, updateUserValues]}>
-      {props.children}
+      {children}
     </UserValuesContext.Provider>
   )
 }

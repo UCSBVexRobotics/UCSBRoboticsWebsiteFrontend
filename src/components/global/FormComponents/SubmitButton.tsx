@@ -1,28 +1,22 @@
 import React from "react"
 import styled from "styled-components"
+import Button from "../Button"
+import Colors from "../../../styles/colors"
 
-const StyledButton = styled.button`
-  padding: 10px 30px;
-  margin: 20px 13px;
-  color: white;
-  font-size: 20px;
-  background-color: #007cc7;
-  border: 1px solid white;
-  border-radius: 7px;
-  outline: none;
-  cursor: pointer;
+type Props = {
+  disabled: boolean
+  name: string
+}
 
-  &:hover {
-    background-color: transparent;
-    color: #007cc7;
-    border: 1px solid #007cc7;
-  }
-`
-
-export default function SubmitButton(props) {
+export default function SubmitButton({ disabled, name }: Props) {
+  /* 
+    Disabled doesn't do anything ??
+  */
   return (
-    <StyledButton disabled={props.disabled} type="submit">
-      {props.name}
-    </StyledButton>
+    <Button
+      primaryColor={Colors.LIGHT_BLUE}
+      secondaryColor="white"
+      text={name}
+    />
   )
 }

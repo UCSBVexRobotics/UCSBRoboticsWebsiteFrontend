@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useLayoutEffect } from "react"
+import React, { useRef, useEffect } from "react"
 import styled from "styled-components"
 import { Close } from "@styled-icons/material-outlined/Close"
-import ReactDOM from "react-dom"
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -14,7 +13,8 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${props => (props.visible ? "visible" : "hidden")};
+  visibility: ${({ visible }: { visible: boolean }) =>
+    visible ? "visible" : "hidden"};
   color: black;
   z-index: 1000;
 `
@@ -58,7 +58,14 @@ const ModalContent = styled.div`
   height: 100%;
 `
 
-export default function Modal(props) {
+type Props = {
+  title: string
+  children: JSX.Element | JSX.Element[]
+  isOpen: boolean
+  closeModal: () => void
+}
+
+export default function Modal({ title, children, isOpen, closeModal }: Props) {
   const wrapperRef = useRef(null)
 
   /*
@@ -67,7 +74,7 @@ export default function Modal(props) {
   useEffect(() => {
     let handleClickOutside = event => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        props.closeModal()
+        closeModal()
       }
     }
     document.addEventListener("click", handleClickOutside, true)
@@ -75,7 +82,7 @@ export default function Modal(props) {
     return () => {
       document.removeEventListener("click", handleClickOutside, true)
     }
-  }, [props.isOpen])
+  }, [isOpen])
 
   /*
     Disable scroll while in modal:
@@ -83,7 +90,7 @@ export default function Modal(props) {
   useEffect(() => {
     let disableScroll = e => e.preventDefault()
 
-    if (props.isOpen) {
+    if (isOpen) {
       window.addEventListener("wheel", disableScroll, { passive: false })
       window.addEventListener("touchmove", disableScroll, { passive: false })
     }
@@ -95,12 +102,12 @@ export default function Modal(props) {
   }, [wrapperRef])
 
   return (
-    <ModalBackground visible={props.isOpen}>
+    <ModalBackground visible={isOpen}>
       <ModalContainer ref={wrapperRef}>
-        <StyledClose size="50" onClick={() => props.closeModal()} />
+        <StyledClose size="50" onClick={() => closeModal()} />
         <ModalBody>
-          <ModalTitle>{props.title}</ModalTitle>
-          <ModalContent>{props.children}</ModalContent>
+          <ModalTitle>{title}</ModalTitle>
+          <ModalContent>{children}</ModalContent>
         </ModalBody>
       </ModalContainer>
     </ModalBackground>

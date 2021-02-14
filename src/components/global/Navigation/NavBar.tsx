@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import LoginModal from "./global/LoginModal"
-import SignupModal from "./global/SignupModal"
-import ForgotPasswordModal from "./global/ForgotPasswordModal"
-import LogoCircle from "../../static/logoCircle.png"
+import LoginModal from "./LoginModal"
+import SignupModal from "./SignupModal"
+import ForgotPasswordModal from "./ForgotPasswordModal"
+import LogoCircle from "../../../../static/logoCircle.png"
 
-import { UserValues } from "./global/UserValuesContext"
+import { UserValues } from "./UserValuesContext"
 
 const NavBarContainer = styled.div`
   height: 100px;
@@ -64,7 +64,7 @@ export default function NavBar() {
   //Function to change the overlay of the navbar once scroll past a 100px
   useEffect(() => {
     window.onscroll = () => {
-      var navLink = document.getElementsByClassName("nav-link")
+      const navLink = document.getElementsByClassName("nav-link")
       if (
         document.body.scrollTop > 100 ||
         document.documentElement.scrollTop > 100
@@ -111,7 +111,6 @@ export default function NavBar() {
             openSignupModal={() => setIsSignupModalOpen(true)}
             openForgotPasswordModal={() => setIsForgotPasswordModalOpen(true)}
             closeModal={() => setIsLoginModalOpen(false)}
-            title="Login"
           />
         ) : null}
         {isModalOpen.Signup ? (
@@ -119,7 +118,6 @@ export default function NavBar() {
             isOpen={isModalOpen.Signup}
             openLoginModal={() => setIsLoginModalOpen(true)}
             closeModal={() => setIsSignupModalOpen(false)}
-            title="Signup"
           />
         ) : null}
         {isModalOpen.ForgotPassword ? (
@@ -128,7 +126,6 @@ export default function NavBar() {
             openLoginModal={() => setIsLoginModalOpen(true)}
             openSignupModal={() => setIsSignupModalOpen(true)}
             closeModal={() => setIsForgotPasswordModalOpen(false)}
-            title="Forgot Password"
           />
         ) : null}
       </UserValues>

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import GlobalStyle from "../styles/globalStyles"
-import NavBar from '../components/NavBar';
+import NavBar from "../components/global/Navigation/NavBar"
 
 const BackgroundContainer = styled.div`
   height: 200vh;
@@ -16,13 +16,13 @@ const PageContainer = styled.div`
   padding: 10% 25%;
 `
 
-export default function Projects() {
+export default function Error404() {
   return (
     <BackgroundContainer>
       <NavBar />
       <GlobalStyle />
       <PageContainer>
-        <h1>Projects</h1>
+        <h1>404 Error: Page not found</h1>
       </PageContainer>
     </BackgroundContainer>
   )

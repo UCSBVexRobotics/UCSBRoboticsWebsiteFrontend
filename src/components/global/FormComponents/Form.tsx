@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import styled from "styled-components"
 import { Form as FormikForm } from "formik"
 
@@ -10,6 +10,11 @@ const CustomForm = styled(FormikForm)`
   margin-top: 5%;
 `
 
-export default function Form(props) {
-  return <CustomForm onSubmit={props.handleSubmit}>{props.children}</CustomForm>
+type Props = {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+  children: JSX.Element | JSX.Element[]
+}
+
+export default function Form({ handleSubmit, children }: Props) {
+  return <CustomForm onSubmit={handleSubmit}>{children}</CustomForm>
 }

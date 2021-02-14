@@ -38,7 +38,13 @@ const DescriptionText = styled.h4`
   text-align: center;
 `
 
-export default function ProjectCircle(props) {
+type Props = {
+  description: string
+  title: string
+  lead: string
+}
+
+export default function ProjectCircle({ description, title, lead }: Props) {
   const [hover, setHover] = useState(false)
 
   return (
@@ -48,12 +54,12 @@ export default function ProjectCircle(props) {
     >
       {hover ? (
         <CenteredText>
-          <DescriptionText>{props.description}</DescriptionText>
+          <DescriptionText>{description}</DescriptionText>
         </CenteredText>
       ) : (
         <CenteredText>
-          <TitleText>{props.title}</TitleText>
-          <LeadText>{props.lead}</LeadText>
+          <TitleText>{title}</TitleText>
+          <LeadText>{lead}</LeadText>
         </CenteredText>
       )}
     </Circle>
