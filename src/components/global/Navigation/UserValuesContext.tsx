@@ -6,7 +6,6 @@ type UserValues = {
   firstName: string
   lastName: string
   email: string
-  password: string
 }
 
 type Props = {
@@ -14,11 +13,10 @@ type Props = {
 }
 
 export const UserValues = ({ children }: Props) => {
-  const [userValues, setUserValues] = useState({
+  const [userValues, setUserValues] = useState<UserValues>({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
   })
 
   const updateUserValues = (newValues: UserValues) => {

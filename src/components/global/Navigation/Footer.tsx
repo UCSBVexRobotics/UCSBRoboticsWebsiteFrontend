@@ -165,7 +165,7 @@ export default function Footer() {
         </Column>
         <Column>
           <Ct>Connect</Ct>
-          <Ci to="/contact-us">Contact Page</Ci>
+          <Ci to="/Contact">Contact Page</Ci>
           <ColumnItem>
             <a href="https://www.facebook.com/ucsbroboticsclub">
               <FacebookSquare size="40px" />

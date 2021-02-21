@@ -1,6 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
+/* 
+
+  THIS IS USED FOR FormCOmponents/SubmitButtons.tsx and Profile
+
+  THIS NEEDS TO BE REPLACED EVENTUALLY SINCE YOU CAN'T DOUBLE STYLE
+
+*/
+
 const StyledButton = styled.button<{
   primary: string
   secondary: string

@@ -62,7 +62,7 @@ export default function LoginModal({
           isSubmitting,
         }) => {
           useEffect(() => {
-            updateUserValues(values)
+            updateUserValues({ email: values.email })
           }, [values])
 
           return (

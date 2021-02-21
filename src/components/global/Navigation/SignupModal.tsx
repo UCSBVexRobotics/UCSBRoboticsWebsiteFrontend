@@ -56,7 +56,7 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
   return (
     <Modal title="Signup" isOpen={isOpen} closeModal={closeModal}>
       <Formik
-        initialValues={{ ...userValues, verifyPassword: "" }}
+        initialValues={{ ...userValues, password: "", verifyPassword: "" }}
         onSubmit={() => console.log("Signed up!")}
         validationSchema={SignupSchema}
       >
@@ -70,7 +70,11 @@ export default function SignupModal({ isOpen, openLoginModal, closeModal }) {
           isSubmitting,
         }) => {
           useEffect(() => {
-            updateUserValues(values)
+            updateUserValues({
+              email: values.email,
+              firstName: values.firstName,
+              lastName: values.lastName,
+            })
           }, [values])
 
           return (
