@@ -96,7 +96,7 @@ export default function Profile() {
                 onClick={() => {
                   const lastProj =
                     formValues.projects[formValues.projects.length - 1]
-                  if (lastProj.title !== "" || lastProj.desc !== "") {
+                  if (lastProj.title !== "") {
                     changeFormValue({
                       projects: [
                         ...formValues.projects,
@@ -118,7 +118,7 @@ export default function Profile() {
                 onClick={() => {
                   formValues.projects = formValues.projects.filter(val => {
                     // Needs Title and desc - may change
-                    return val.title !== "" && val.desc !== ""
+                    return val.title !== ""
                   })
                   if (editOpen) {
                     /* 

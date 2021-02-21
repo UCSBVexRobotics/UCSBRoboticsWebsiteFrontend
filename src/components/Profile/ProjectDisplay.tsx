@@ -64,7 +64,9 @@ const ProjectShow = ({ projects }: { projects: ProjType }) => {
         return (
           <Project key={i}>
             <ProjectTitle>{proj.title}</ProjectTitle>
-            <ProjectContent>&nbsp;-&nbsp;{proj.desc}</ProjectContent>
+            {proj.desc ? (
+              <ProjectContent>&nbsp;-&nbsp;{proj.desc}</ProjectContent>
+            ) : null}
           </Project>
         )
       })}
