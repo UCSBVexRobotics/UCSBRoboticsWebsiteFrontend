@@ -9,7 +9,9 @@ import Footer from '../components/Footer';
 
 const BackgroundContainer = styled.div`
   background-image: linear-gradient(#3DD6FF, #003384)
-`
+
+
+  `
 
 export default function Home() {
   return (
@@ -23,3 +25,6 @@ export default function Home() {
     </BackgroundContainer>
   )
 }
+
+
+
