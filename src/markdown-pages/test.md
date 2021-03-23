@@ -1,37 +1,33 @@
 ---
-slug: "/mech/test"
+slug: "projects/mechanical"
+team: "Mechanical"
 title: "Mech Team Title"
-date: "01-01-1999"
 ---
 
-Maybe try this:
-https://www.gatsbyjs.com/docs/how-to/routing/mdx/
+# Goals
 
-- Goals
+- 2/14, Finish Document
+- 2/26, Group project
+- 2/28, Team grpah
+- 2/29, Efficiency
+- 2/30, 2000 words
 
-  - 2/14, Finish Document
-  - 2/26, Group project
-  - 2/28, Team grpah
-  - 2/29, Efficiency
-  - 2/30, 2000 words
-  - 3/1, new goal
+# Workshops
 
-- Workshops
+- Team workshop, 2/14, 1:00pm, https://www.zoom.us
+- Grouping, 2/26, 2:00pm, https://www.zoom.us
+- Brainstorm, 2/28, 3:00pm, https://www.zoom.us
+- Team work, 2/29, 4:00pm, https://www.zoom.us
+- Social, 2/30, 5:00pm, https://www.zoom.us
 
-  - Team workshop, 2/14, 1:00pm, zoom.us
-  - Grouping, 2/26, 2:00pm, zoom.us
-  - Brainstorm, 2/28, 3:00pm, zoom.us
-  - Team work, 2/29, 4:00pm, zoom.us
-  - Social, 2/30, 5:00pm, zoom.us
+# Projects
 
-- Projects
+- AI Robot
+- Motor project
+- Team efficiency
+- Movement controls
+- Team project
 
-  - AI Robot
-  - Motor project
-  - Team efficiency
-  - Movement controls
-  - Team project
+# Lead
 
-- Lead
-
-  - Joe Smith, 3rd Year, Data Science
+- Joe Smith, 3rd Year, Data Science

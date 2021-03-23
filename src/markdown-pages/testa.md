@@ -1,7 +1,7 @@
 ---
-slug: "/elec/test"
+slug: "projects/electrical"
+team: "electrical"
 title: "Elec Team Title"
-date: "01-01-1999"
 ---
 
 # Project 1

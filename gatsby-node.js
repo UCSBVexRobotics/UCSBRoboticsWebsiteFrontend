@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             frontmatter {
               slug
+              team
             }
           }
         }
@@ -37,15 +38,14 @@ exports.createPages = async ({ graphql, actions }) => {
   const elecTemplate = path.resolve("src/pages/elec.js")
 
   const templates = {
-    mech: mechTemplate,
-    elec: elecTemplate,
+    mechanical: mechTemplate,
+    electrical: elecTemplate,
   }
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const slug = node.frontmatter.slug
+    const { slug, team } = node.frontmatter
 
-    const whichTeam = slug.split("/")[1]
-    const template = templates[whichTeam]
+    const template = templates[team.toLowerCase()]
 
     createPage({
       path: slug,
