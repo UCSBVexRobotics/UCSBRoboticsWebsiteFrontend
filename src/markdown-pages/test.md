@@ -14,6 +14,7 @@ https://www.gatsbyjs.com/docs/how-to/routing/mdx/
   - 2/28, Team grpah
   - 2/29, Efficiency
   - 2/30, 2000 words
+  - 3/1, new goal
 
 - Workshops
 

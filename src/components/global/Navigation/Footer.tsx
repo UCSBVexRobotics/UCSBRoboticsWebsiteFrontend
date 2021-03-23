@@ -1,14 +1,16 @@
 import React from "react"
 import styled from "styled-components"
-import LogoCircle from "../../../../static/logoCircle.png"
-import { FacebookSquare } from "@styled-icons/boxicons-logos/FacebookSquare"
-import { Email } from "@styled-icons/material/Email"
 import { Link } from "gatsby"
 
+import Colors from "../../../styles/colors"
+import LogoCircle from "../../../../static/Logo.svg"
+
 const FooterContainer = styled.div`
-  padding: 0 10%;
+  // padding: 0 10% 10px 10%;
   display: flex;
   justify-content: center;
+
+  background-color: ${Colors.BLACK};
 
   @media (max-width: 1000px) {
     flex-wrap: wrap;
@@ -16,81 +18,70 @@ const FooterContainer = styled.div`
 `
 const LogoContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
+
+  @media (max-width: 1000px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `
 const ClubName = styled.h2`
   word-wrap: no;
   color: white;
 `
 const Image = styled.img`
-  width: 100px;
+  width: 75px;
+  &:hover {
+    transform: rotate(360deg);
+    transition: transform 0.2s ease-out;
+  }
 `
 const LinkContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: space-around;
 
   /* Links under title */
-  @media (max-width: 1000px) {
+  @media (max-width: 963px) {
     & > * {
       text-align: center;
     }
   }
 
-  /* 2x2 grid */
+  /* Single column */
   @media (max-width: 750px) {
-    flex-wrap: wrap;
-
-    /* left column */
-    & > :nth-child(odd) {
-      margin-right: 10px;
-      text-align: right;
-      padding-left: 0;
-    }
-
-    /* right column */
-    & > :nth-child(even) {
-      margin-left: 10px;
-      text-align: left;
-      padding-left: 0;
-    }
-
-    /* bottom row */
-    & > :nth-child(-n + 2) {
-      margin-bottom: 0;
-    }
+    justify-content: center;
   }
 
-  /* Single column */
-  @media (max-width: 365px) {
-    justify-content: center;
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
   }
 `
 const Column = styled.ul`
   list-style-type: none;
   margin-top: 0;
+  width: 100%;
 
-  /* 
-        2x2 grid
-        make sure bigger enough so there isn't 3 on a line
-    */
+  padding: 0 20px;
+
   @media (max-width: 750px) {
     width: 40%;
   }
 
   /* single column */
-  @media (max-width: 365px) {
-    width: 135px;
-    margin: 0 10px;
+  @media (max-width: 500px) {
+    width: 100%;
+    padding-left: 0;
   }
 `
 const Ct = styled.h2`
-  color: white;
+  color: ${Colors.YELLOW};
   cursor: default;
 
   /* single column */
-  @media (max-width: 365px) {
+  @media (max-width: 500px) {
     text-align: center;
   }
 `
@@ -101,13 +92,14 @@ const ColumnItem = styled.li`
   }
 
   /* single column */
-  @media (max-width: 365px) {
+  @media (max-width: 500px) {
     text-align: center;
+    width: 100%;
   }
 `
 const ColumnItemText = styled.p`
   &:hover {
-    color: #9ba6ab;
+    color: ${Colors.HIGHLIGHT_TEXT_LIGHT};
   }
 
   margin: 0;
@@ -137,10 +129,10 @@ export default function Footer() {
     <FooterContainer>
       <LogoContainer>
         <Link to="/" onClick={() => toTopOfPage()}>
-          <Image src={LogoCircle} />
+          <ClubName>UCSB ROBOTICS CLUB</ClubName>
         </Link>
         <Link to="/" onClick={() => toTopOfPage()}>
-          <ClubName>UCSB ROBOTICS CLUB</ClubName>
+          <Image src={LogoCircle} />
         </Link>
       </LogoContainer>
       <LinkContainer>
@@ -149,31 +141,20 @@ export default function Footer() {
           <Ci to="/About-Us">About Us</Ci>
           <Ci to="/Projects">Projects</Ci>
           <Ci to="/Calendar">Calendar</Ci>
+          <Ci to="/Calendar">Contact Us</Ci>
         </Column>
         <Column>
           <Ct>Projects</Ct>
-          <Ci to="/projects/electrical">Electrical Team</Ci>
-          <Ci to="/projects/mechanical">Mechanical Team</Ci>
-          <Ci to="/projects/software">Software Team</Ci>
-          <Ci to="/projects/web">Web Design Team</Ci>
+          <Ci to="/projects/electrical">Electrical</Ci>
+          <Ci to="/projects/mechanical">Mechanical</Ci>
+          <Ci to="/projects/software">Software</Ci>
+          <Ci to="/projects/web">Web Design</Ci>
         </Column>
         <Column>
           <Ct>Members</Ct>
           <Ci to="/dashboard">Dashboard</Ci>
           <Ci to="/Profile">Profile</Ci>
           <Ci to="/store">Store</Ci>
-        </Column>
-        <Column>
-          <Ct>Connect</Ct>
-          <Ci to="/Contact">Contact Page</Ci>
-          <ColumnItem>
-            <a href="https://www.facebook.com/ucsbroboticsclub">
-              <FacebookSquare size="40px" />
-            </a>
-            <a href="mailto:roboticsclubucsb@gmail.com">
-              <Email size="40px" />
-            </a>
-          </ColumnItem>
         </Column>
       </LinkContainer>
     </FooterContainer>
