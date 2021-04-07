@@ -27,7 +27,6 @@ const TextWrapper = styled.div`
 `
 
 const Title = styled.h1`
-  font-weight: lighter;
   color: #eefbfb;
   margin-bottom: 0;
   margin-top: 0;

@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components"
 const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
-        font-family: 'Arial'
+        font-family: 'Nunito', sans-serif;
     }
 
     html {
@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
     h2 {
         margin-bottom: 15px;
+        font-weight: normal
     }
 
     a {

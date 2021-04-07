@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import LoginModal from "./global/LoginModal"
 import LogoCircle from "../../static/logoCircle.png"
+import { CircleFill } from "@styled-icons/bootstrap"
+import { Trustedshops } from "styled-icons/simple-icons"
 
 const NavBarContainer = styled.div`
   height: 100px;
@@ -19,6 +21,16 @@ const NavBarInnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`
+
+const Image = styled.img`
+  width: 100px;
 `
 
 const Title = styled.h2`
@@ -38,8 +50,10 @@ const LinksContainer = styled.div`
 
 const NavLink = styled.div`
   margin: 0 30px;
-  font-weight: lighter;
   letter-spacing: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:hover {
     opacity: 0.5;
@@ -50,8 +64,28 @@ const LoginLink = styled(NavLink)`
   cursor: pointer;
 `
 
+const LoginLinkContainer = styled.div`
+  background-color: red;
+  padding: 10px 20px;
+  margin: 4px 2px;
+  border-radius: 16px;
+`
+
 function toTopOfPage() {
   window.scrollTo(0, 0)
+}
+
+function NavLinkWithDot({ isLogin = false, link, name, active }) {
+  return (
+    <NavLink>
+      <Link to={link} className="nav-link">
+        {name}
+      </Link>
+      {active ? (
+        <CircleFill className="nav-link" size="5px" color="white" />
+      ) : null}
+    </NavLink>
+  )
 }
 
 export default function NavBar() {
@@ -86,33 +120,27 @@ export default function NavBar() {
         title="Login"
       />
       <NavBarInnerContainer>
+        <LogoContainer>
+          <Image src={LogoCircle} />
+        </LogoContainer>
         <Title onClick={() => toTopOfPage()}>
           <Link to="/" className="nav-link">
             UCSB ROBOTICS CLUB
           </Link>
         </Title>
         <LinksContainer>
-          <NavLink>
-            <Link to="/Projects" className="nav-link">
-              About
-            </Link>
-          </NavLink>
-          <NavLink>
-            <Link to="/Calendar" className="nav-link">
-              Test
-            </Link>
-          </NavLink>
-          <NavLink>
-            <Link to="/Contact" className="nav-link">
-              Contact
-            </Link>
-          </NavLink>
-          <LoginLink
-            className="nav-link"
-            onClick={() => setIsModalOpen(!isModalOpen)}
-          >
-            Login
-          </LoginLink>
+          <NavLinkWithDot link="/Projects" name="About" active={true} />
+          <NavLinkWithDot link="/Calendar" name="Calendar" active={true} />
+          <NavLinkWithDot link="/Shop" name="Shop" active={true} />
+          <NavLinkWithDot link="/Contact" name="Contact" active={true} />
+          <LoginLinkContainer>
+            <LoginLink
+              className="nav-link"
+              onClick={() => setIsModalOpen(!isModalOpen)}
+            >
+              Login
+            </LoginLink>
+          </LoginLinkContainer>
         </LinksContainer>
       </NavBarInnerContainer>
     </NavBarContainer>
